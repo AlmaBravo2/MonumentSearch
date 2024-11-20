@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Models.MonumentoConvertido;
+import org.example.Models.MonumentoOriginal;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

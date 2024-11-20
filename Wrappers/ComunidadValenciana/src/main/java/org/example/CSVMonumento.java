@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.Models.MonumentoConvertido;
+import org.example.Models.MonumentoOriginal;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Models;
 
 public class MonumentoOriginal {
     //IGPCV;DENOMINACION;PROVINCIA;MUNICIPIO;UTMESTE;UTMNORTE;CODCLASIFICACION;CLASIFICACION;CODCATEGORIA;CATEGORIA

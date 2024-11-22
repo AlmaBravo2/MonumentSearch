@@ -3,13 +3,13 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 
 @Entity
-@Table(name = "Localidad")
+@Table(name = "Provincia")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Localidad {
+public class Provincia {
 
     @Id
     @Column(name="codigo")
@@ -17,8 +17,5 @@ public class Localidad {
 
     @Column(name="nombre", length=100, nullable=false)
     private String nombre;
-
-    @Column(name="provincia_codigo", nullable=false)
-    private int provinciaCodigo;
 
 }

@@ -2,7 +2,6 @@ package org.example.Utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -11,7 +10,7 @@ import java.net.http.HttpResponse;
 
 public class MonumentLocator {
 
-    public static HttpResponse<String> getMonumentLocationInfo(double longitude, double latitude){
+    public static HttpResponse<String> getMonumentLocationInfo(String longitude, String latitude){
         try {
             // Construir la URL para la solicitud a Nominatim
             String url = String.format(
@@ -36,7 +35,7 @@ public class MonumentLocator {
         }
         return null;
     }
-    public static String getMonumentDirection(double longitude, double latitude) {
+    public static String getMonumentDirection(String longitude, String latitude) {
        HttpResponse<String> response = getMonumentLocationInfo(longitude, latitude);
          try {
               ObjectMapper mapper = new ObjectMapper();
@@ -48,7 +47,7 @@ public class MonumentLocator {
          return null;
     }
 
-    public static String getMonumentPostCode(double longitude, double latitude){
+    public static String getMonumentPostCode(String longitude,String latitude){
         HttpResponse<String> response = getMonumentLocationInfo(longitude, latitude);
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -60,7 +59,7 @@ public class MonumentLocator {
         return null;
     }
 
-    public static String getMonumentCity(double longitude, double latitude){
+    public static String getMonumentCity(String longitude, String latitude){
         HttpResponse<String> response = getMonumentLocationInfo(longitude, latitude);
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -76,7 +75,7 @@ public class MonumentLocator {
         return null;
     }
 
-    public static String getMonumentProvince(double longitude, double latitude){
+    public static String getMonumentProvince(String longitude, String latitude){
         HttpResponse<String> response = getMonumentLocationInfo(longitude, latitude);
         try {
             ObjectMapper mapper = new ObjectMapper();

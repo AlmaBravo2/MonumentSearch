@@ -3,6 +3,7 @@ package org.example.Models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MonumentoOrginalEuskadi {
     private String documentName;
@@ -42,7 +43,7 @@ public class MonumentoOrginalEuskadi {
         return documentDescription;
     }
 
-    public void setDocumentDescripction(String documentDescripction) {
+    public void setDocumentDescription(String documentDescripction) {
         this.documentDescription = documentDescripction;
     }
 
@@ -65,7 +66,7 @@ public class MonumentoOrginalEuskadi {
     }
 
 
-    @JsonProperty("latwg84")
+    @JsonProperty("latwgs84")
     public String getLatwgs84() {
         return latwgs84;
     }
@@ -99,5 +100,19 @@ public class MonumentoOrginalEuskadi {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    @Override
+    public String toString() {
+        return "MonumentoOrginalEuskadi{" +
+                "documentName='" + documentName + '\'' +
+                ", documentDescription='" + documentDescription + '\'' +
+                ", municipality='" + municipality + '\'' +
+                ", address='" + address + '\'' +
+                ", latwgs84='" + latwgs84 + '\'' +
+                ", lonwgs84='" + lonwgs84 + '\'' +
+                ", territory='" + territory + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                '}';
     }
 }

@@ -1,45 +1,31 @@
 package iei.proyecto.monumentos.BDconexion;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import javax.sql.DataSource;
+
+@Configuration
 public class BDconexion {
-    // Información de conexión
-    private static final String URL = "jdbc:mysql://databaseiei.cn0ai6cmskk8.eu-west-3.rds.amazonaws.com:3306/";
-    private static final String USER = "admin";
-    private static final String PASSWORD = "alcachofaIEI";
 
-    // Método para obtener una conexión
-    public static Connection getConnection() throws SQLException {
-        Connection connection = null;
-        try {
-            // Registrar el controlador de MySQL
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Establecer la conexión
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Conexión exitosa a la base de datos.");
-        } catch (ClassNotFoundException e) {
-            System.err.println("Error al cargar el controlador de MySQL.");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.err.println("Error al conectar con la base de datos.");
-            e.printStackTrace();
-            throw e; // Lanzar la excepción para manejarla externamente si es necesario
-        }
-        return connection;
+    public BDconexion(){}
+
+    // Definir el DataSource para la conexión con la base de datos
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://databaseiei.cn0ai6cmskk8.eu-west-3.rds.amazonaws.com:3306/IEI_database");
+        dataSource.setUsername("admin");
+        dataSource.setPassword("alcachofaIEI");
+        return dataSource;
     }
 
-    // Método principal para pruebas
-    public static void main(String[] args) {
-        try {
-            Connection connection = BDconexion.getConnection();
-            if (connection != null) {
-                System.out.println("Conexión establecida correctamente.");
-                connection.close();
-            }
-        } catch (SQLException e) {
-            System.err.println("No se pudo establecer la conexión.");
-        }
+    // Configurar JdbcTemplate para inyección
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 }

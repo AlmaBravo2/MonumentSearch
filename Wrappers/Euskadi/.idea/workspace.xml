@@ -4,78 +4,133 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cb2fed2-d6db-4c46-bca0-1957da8069cd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="ac34ac7d-8413-4f56-a130-fdf3df6d6f77" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ConversorEuskadi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ConversorEuskadi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Data/monumentosEuskadiConvertidos.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Data/monumentosEuskadiConvertidos.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/JsonMonumento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/JsonMonumento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Models/MonumentoOrginalEuskadi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Models/MonumentoOrginalEuskadi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Utils/MonumentoOriginalEuskadiDeserializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/ConversorEuskadi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/ConversorEuskadi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/JsonMonumento$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/JsonMonumento$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/JsonMonumento.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/JsonMonumento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Models/MonumentoOrginalEuskadi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Models/MonumentoOrginalEuskadi.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2pFacFkGCeCZRmKo5Lu98wRG9yj" />
+  <component name="ProjectId" id="2pG9jgvkVPUk99kPdiB9qXmRUNn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.ConversorEuskadi.executor": "Run",
+    "Application.JsonConverter.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/parsi/OneDrive/Escritorio/UPV LABORATORIO/Quart/IEI/MonumentSearch/Wrappers/Euskadi",
+    "last_opened_file_path": "C:/Users/parsi/OneDrive/Escritorio/UPV LABORATORIO/Quart/IEI/MonumentSearch/Wrappers/Euskadi/src/main/java/org/example/Data",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\parsi\OneDrive\Escritorio\UPV LABORATORIO\Quart\IEI\MonumentSearch\Wrappers\Euskadi\src\main\java\org\example\Data" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ConversorEuskadi">
+    <configuration name="ConversorEuskadi" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.ConversorEuskadi" />
       <module name="Euskadi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+    <configuration name="JsonConverter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.Utils.JsonConverter" />
       <module name="Euskadi" />
-      <option name="filePath" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.Utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ConversorEuskadi" />
+        <item itemvalue="Application.JsonConverter" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-22-openjdk-22-4caba194b151-f504ca98" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9cb2fed2-d6db-4c46-bca0-1957da8069cd" name="Changes" comment="" />
-      <created>1732381080437</created>
+      <changelist id="ac34ac7d-8413-4f56-a130-fdf3df6d6f77" name="Changes" comment="" />
+      <created>1732381683937</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1732381080437</updated>
-      <workItem from="1732381081571" duration="9000" />
+      <updated>1732381683937</updated>
+      <workItem from="1732381684999" duration="7253000" />
+      <workItem from="1732535255986" duration="2683000" />
+      <workItem from="1732555301940" duration="1991000" />
+      <workItem from="1732557304078" duration="10328000" />
+      <workItem from="1732705228559" duration="14519000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

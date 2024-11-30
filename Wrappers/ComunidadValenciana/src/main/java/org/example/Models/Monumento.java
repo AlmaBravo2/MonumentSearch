@@ -98,5 +98,20 @@ public class Monumento {
         this.provincia = provincia;
     }
 
+    @Override
+    public String toString() {
+        return "Monumento{" +
+                "nombre='" + nombre + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", codigo_postal='" + codigo_postal + '\'' +
+                ", longitud='" + longitud + '\'' +
+                ", latitud='" + latitud + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", localidad=" + localidad +
+                ", provincia=" + provincia +
+                '}';
+    }
+
 
 }

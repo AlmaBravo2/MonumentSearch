@@ -4,46 +4,77 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Models.*;
 import org.example.Utils.MonumentLocator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import static org.example.CSVMonumento.getMonumentos;
+import static org.example.ConvertidorCoordenadas.convertirCoordenadas;
 
 public class Convertidor {
 
-
-    public static List<MonumentoConvertido> convertir() {
-        return null;
-    }
-
+    // Crear el objeto MONUMENTO que se enviará a través de la API
     private static Monumento convertirMonumento(MonumentoConvertido monumento) {
         String nombre = monumento.getDenominacion();
-        String tipo = null;
+        String tipo = getTipo(monumento);
         String provinciaNombre = monumento.getProvincia();
         String municipio = monumento.getMunicipio();
         String latitud = monumento.getLatitud();
         String longitud = monumento.getLongitud();
-        String descripcion = null;
+        if(latitud.equals("") || latitud.equals("") ||latitud.equals("NaN") || latitud.equals("NaN")) {
+            return null;
+            // Si no se tienen las coordenadas, no se puede crear el monumento
+        }
+        String descripcion = monumento.getClasificacion();
         String codPostal = MonumentLocator.getMonumentPostCode(latitud, longitud);
         Provincia provincia = new Provincia(codPostal.substring(0, 2), provinciaNombre);
         Localidad localidad = new Localidad(municipio);
-        return new Monumento(nombre, tipo, null, codPostal, longitud, latitud, descripcion, localidad, provincia);
+        String direccion = MonumentLocator.getMonumentDirection(latitud, longitud);
+        Monumento monumentoConvertido = new Monumento(nombre, tipo, direccion, codPostal, longitud, latitud, descripcion, localidad, provincia);
+        System.out.println(monumentoConvertido);
+        return monumentoConvertido;
     }
 
+    /* MÉTODO QUE OBTIENEN EL TIPO DE UN MONUMENTO A PARTIR DE UNA SERIE DE PALABRAS CLAVE*/
+    private static String getTipo(MonumentoConvertido monumento) {
+        String nombre = monumento.getDenominacion();
+        nombre = nombre.toLowerCase();
+        String tipo = "Otro";
+        if(nombre.contains("iglesia") || nombre.contains("ermita") || nombre.contains("catedral") || nombre.contains("basílica") || nombre.contains("cartuja"))
+        {    tipo = "Iglesia-Ermita";}
+        else if (nombre.contains("yacimiento") || nombre.contains("cueva") || nombre.contains("dolmen") || nombre.contains("arqueológico") || nombre.contains("poblado"))
+        {    tipo = "Yacimiento arqueológico";}
+        else if (nombre.contains("monasterio") || nombre.contains("convento")) {    tipo = "Monasterio-Convento";}
+        else if (nombre.contains("castillo") || nombre.contains("torre") || nombre.contains("muralla") || nombre.contains("fortaleza")) {    tipo = "Castillo-Fortaleza-Torre";}
+        else if (nombre.contains("palacio") || nombre.contains("casa") || nombre.contains("museo")){    tipo = "Edificio singular";}
+        return tipo;
 
-    public static void main(String[] args) throws JsonProcessingException {
-        List<MonumentoConvertido> monumentos = convertir();
-        for (MonumentoConvertido monumento : monumentos) {
-            ObjectMapper objectMapper = new ObjectMapper();
-           Monumento monumentoConvertido = convertirMonumento(monumento);
-           System.out.println(objectMapper.writeValueAsString(monumentoConvertido));
+    }
+
+    // MÉTODO QUE A PARTIR DE LOS MONUMENTOS CON LAS COORDENADAS CORREGIDAS, CREA UNA LISTA DE MONUMENTOS DEFINITIVOS.
+    public static List<Monumento> getMonumentos() {
+        List<MonumentoConvertido> monumentosConvertidos = convertirCoordenadas();
+        List<Monumento> monumentos = new ArrayList<>();
+        for (MonumentoConvertido monumento : monumentosConvertidos) {
+                Monumento monumentoConvertido = convertirMonumento(monumento);
+                if (monumentoConvertido != null) {
+                    monumentos.add(monumentoConvertido);
+                }
+        }
+        monumentos.remove(null);
+        return monumentos;
+    }
+
+    // MÉTODO QUE CONVIERTE UNA LISTA DE MONUMENTOS A UN STRING JSON
+    public static String monumentosToJSON(List<Monumento> monumentos) {
+        ObjectMapper mapper = new ObjectMapper();
+        monumentos.removeIf(monumento -> monumento == null);
+        try {
+            return mapper.writeValueAsString(monumentos);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "Error converting monumentos to JSON";
         }
     }
+
+
 }

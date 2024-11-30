@@ -1,12 +1,9 @@
-package org.example;
+package org.example.Logic;
 
-import org.example.Models.MonumentoConvertido;
 import org.example.Models.MonumentoOriginal;
 import org.example.Utils.TextSanitizer;
-import org.w3c.dom.Text;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

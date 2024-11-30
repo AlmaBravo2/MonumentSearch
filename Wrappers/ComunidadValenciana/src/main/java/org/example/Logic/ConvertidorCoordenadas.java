@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Logic;
 
 import org.example.Models.MonumentoConvertido;
 import org.example.Models.MonumentoOriginal;
@@ -12,19 +12,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.example.CSVMonumento.getMonumentos;
+import static org.example.Logic.CSVMonumento.getMonumentos;
 
 // Clase que utliza Selenium para convertir las coordenadas UTM de los monumentos a coordenadas geográficas
 public class ConvertidorCoordenadas{
 
     private static final String CONVERTIDOR_URL = "https://padeepro.com/converterutm.html";
-    private static List<MonumentoOriginal> monumentos = getMonumentos("src/main/java/org/example/Data/bienes_inmuebles_interes_cultural.csv");
+
 
 
     // MÉTODO QUE RECIBE UNA LISTA CON LAS COORDENADAS ORIGINALES Y DEVUELVE UNA LISTA DE TODOS LOS MONUMENTOS CON LAS
     // COORDENADAS CONVERTIDAS
-    public static List<MonumentoConvertido> convertirCoordenadas(){
-
+    public static List<MonumentoConvertido> convertirCoordenadas(String filePath){
+        List<MonumentoOriginal> monumentos = getMonumentos(filePath);
         monumentos.remove(0);
         List<MonumentoConvertido> monumentosConvertidos = new ArrayList<>();
         HashMap<String,String> coordenadas = new HashMap<>();

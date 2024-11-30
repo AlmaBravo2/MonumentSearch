@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Logic;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,7 +7,7 @@ import org.example.Utils.MonumentLocator;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.example.ConvertidorCoordenadas.convertirCoordenadas;
+import static org.example.Logic.ConvertidorCoordenadas.convertirCoordenadas;
 
 public class Convertidor {
 
@@ -29,7 +29,6 @@ public class Convertidor {
         Localidad localidad = new Localidad(municipio);
         String direccion = MonumentLocator.getMonumentDirection(latitud, longitud);
         Monumento monumentoConvertido = new Monumento(nombre, tipo, direccion, codPostal, longitud, latitud, descripcion, localidad, provincia);
-        System.out.println(monumentoConvertido);
         return monumentoConvertido;
     }
 
@@ -50,16 +49,23 @@ public class Convertidor {
     }
 
     // MÉTODO QUE A PARTIR DE LOS MONUMENTOS CON LAS COORDENADAS CORREGIDAS, CREA UNA LISTA DE MONUMENTOS DEFINITIVOS.
-    public static List<Monumento> getMonumentos() {
-        List<MonumentoConvertido> monumentosConvertidos = convertirCoordenadas();
+    public static List<Monumento> getMonumentos(String filePath) {
+        List<MonumentoConvertido> monumentosConvertidos = convertirCoordenadas(filePath);
         List<Monumento> monumentos = new ArrayList<>();
+        int total = monumentosConvertidos.size();
+        int contador = 1;
         for (MonumentoConvertido monumento : monumentosConvertidos) {
                 Monumento monumentoConvertido = convertirMonumento(monumento);
                 if (monumentoConvertido != null) {
                     monumentos.add(monumentoConvertido);
+                    System.out.println(String.format("Monumento %d / %d", contador, total));
+                    contador++;
+                }
+                else{
+                    System.err.println("Valores de entrada incorrectos o incompletos");
+                    contador++;
                 }
         }
-        monumentos.remove(null);
         return monumentos;
     }
 
@@ -76,5 +82,9 @@ public class Convertidor {
         }
     }
 
+    public static String convertidor(String filePath) {
+        List<Monumento> monumentos = getMonumentos(filePath);
+        return monumentosToJSON(monumentos);
+    }
 
 }

@@ -19,7 +19,7 @@ public class BDconexion {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://databaseiei.cn0ai6cmskk8.eu-west-3.rds.amazonaws.com:3306/IEI_database");
         dataSource.setUsername("admin");
-        dataSource.setPassword("alcachofaIEI");
+        dataSource.setPassword("garrofaIEI");
         return dataSource;
     }
 
@@ -27,5 +27,22 @@ public class BDconexion {
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
+    }
+
+    // Método main para probar la conexión
+    public static void main(String[] args) {
+        BDconexion conexion = new BDconexion();
+        DataSource dataSource = conexion.dataSource();
+        JdbcTemplate jdbcTemplate = conexion.jdbcTemplate(dataSource);
+
+        try {
+            // Consulta simple para verificar la conexión
+            String sql = "SELECT 1";
+            Integer resultado = jdbcTemplate.queryForObject(sql, Integer.class);
+            System.out.println("Conexión exitosa. Resultado de prueba: " + resultado);
+        } catch (Exception e) {
+            System.err.println("Error en la conexión: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

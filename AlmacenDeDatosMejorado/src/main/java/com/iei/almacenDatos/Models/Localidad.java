@@ -19,7 +19,7 @@ public class Localidad {
     @Column(name = "codigo", nullable = false)
     private Integer codigo;
 
-    @Column(name = "nombre", length = 100, nullable = false)
+    @Column(name = "nombre", length = 100, nullable = false, unique = true)
     private String nombre;
 
     @ManyToOne

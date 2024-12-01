@@ -21,8 +21,8 @@ public class Convertidor {
         String nombre = monumento.getDenominacion();
         String tipo = getTipo(monumento);
         String provinciaNombre = monumento.getProvincia();
-        if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "Alicante") < 2) {
-            provinciaNombre = "Alicante";
+        if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "ALICANTE") < 3) {
+            provinciaNombre = "ALICANTE";
         }
         else if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "CASTELLÓN") < 2) {
             provinciaNombre = "CASTELLÓN";
@@ -48,7 +48,7 @@ public class Convertidor {
     private static String getTipo(MonumentoConvertido monumento) {
         String nombre = monumento.getDenominacion();
         nombre = nombre.toLowerCase();
-        String tipo = "Otro";
+        String tipo = "Otros";
         if(nombre.contains("iglesia") || nombre.contains("ermita") || nombre.contains("catedral") || nombre.contains("basílica") || nombre.contains("cartuja"))
         {    tipo = "Iglesia-Ermita";}
         else if (nombre.contains("yacimiento") || nombre.contains("cueva") || nombre.contains("dolmen") || nombre.contains("arqueológico") || nombre.contains("poblado"))

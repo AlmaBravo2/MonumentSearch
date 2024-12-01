@@ -22,7 +22,7 @@ public class Monumento {
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
 
-    @Column(name = "direccion", length = 100, nullable = false)
+    @Column(name = "direccion", length = 1000, nullable = false)
     private String direccion;
 
     @Column(name = "codigo_postal", length = 5, nullable = false)

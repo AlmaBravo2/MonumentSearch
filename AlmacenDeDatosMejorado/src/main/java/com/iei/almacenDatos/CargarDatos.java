@@ -51,14 +51,19 @@ public class CargarDatos {
                 System.out.println("Localidad: " + localidad.getNombre());
                 System.out.println("Monumento: " + monumento.getNombre());
 
-                Thread.sleep(1000);
                provinciaRepository.save(provincia);
-               Thread.sleep(1000);
-               localidadRepository.save(localidad);
-               Thread.sleep(1000);
-               monumentoRepository.save(monumento);
+               Provincia provincia1 = provinciaRepository.findByNombre(provincia.getNombre()).get();
+                localidad.setProvincia(provincia1);
+                try {
+                    localidadRepository.save(localidad);
+                }catch (Exception e){
+                    System.out.println("Localidad ya existente");
+                }
+                Localidad localidad1 = localidadRepository.findByNombre(localidad.getNombre()).get();
+                monumento.setLocalidad(localidad1);
 
-
+                System.out.println(monumento.getTipo());
+                monumentoRepository.save(monumento);
 
            }
 
@@ -66,8 +71,6 @@ public class CargarDatos {
 
 
        } catch (JsonProcessingException e) {
-           throw new RuntimeException(e);
-       } catch (InterruptedException e) {
            throw new RuntimeException(e);
        }
    }

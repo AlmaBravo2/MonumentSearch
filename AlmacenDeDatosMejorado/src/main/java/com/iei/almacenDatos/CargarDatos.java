@@ -25,6 +25,10 @@ public class CargarDatos {
     private MonumentoRepository monumentoRepository;
     private LocalidadRepository localidadRepository;
     private ProvinciaRepository provinciaRepository;
+    private List<String> monumentos = new ArrayList<>();
+    private final String comunitatValenciana = ComunitatValenciana.main("src/main/java/com/iei/almacenDatos/DataToTest/bienes_inmuebles_interes_cultural.csv");
+    //private final String euskadi =  AÑADIR AQUI LA LLAMADA AL MÉTODO CUANDO ESTÉ
+    //private final String castillaYLeon =
 
     public CargarDatos(MonumentoRepository monumentoRepository, LocalidadRepository localidadRepository, ProvinciaRepository provinciaRepository) {
         this.monumentoRepository = monumentoRepository;
@@ -34,54 +38,59 @@ public class CargarDatos {
 
    public void cargarDatos(){
        ObjectMapper objectMapper = new ObjectMapper();
-       String res = ComunitatValenciana.main("src/main/java/com/iei/almacenDatos/DataToTest/bienes_inmuebles_interes_cultural.csv");
-       try {
-           List<MonumentoDTO> monumentos = objectMapper.readValue(res, new TypeReference<List<MonumentoDTO>>() {});
-           List<HashMap<String, Object>> monumentosMap = new ArrayList<>();
-           for (MonumentoDTO monumento : monumentos) {
-               monumentosMap.add(MonumentMapper.monumentMapper(monumento));
+       monumentos.add(comunitatValenciana);
+       monumentos.add(euskadi);
+       monumentos.add(castillaYLeon);
+
+       for(String res : monumentos) {
+           try {
+               List<MonumentoDTO> monumentos = objectMapper.readValue(res, new TypeReference<List<MonumentoDTO>>() {
+               });
+               List<HashMap<String, Object>> monumentosMap = new ArrayList<>();
+               for (MonumentoDTO monumento : monumentos) {
+                   monumentosMap.add(MonumentMapper.monumentMapper(monumento));
+               }
+
+               for (HashMap<String, Object> monumentoHashMap : monumentosMap) {
+                   Monumento monumento = (Monumento) monumentoHashMap.get("monumento");
+                   Localidad localidad = (Localidad) monumentoHashMap.get("localidad");
+                   Provincia provincia = (Provincia) monumentoHashMap.get("provincia");
+
+                   System.out.println("Provincia: " + provincia.getNombre());
+                   System.out.println("Localidad: " + localidad.getNombre());
+                   System.out.println("Monumento: " + monumento.getNombre());
+
+
+                   try { // Si la provincia ya existe, no se guarda
+                       provinciaRepository.save(provincia);
+                   } catch (Exception e) {
+                       System.out.println("Provincia ya existente");
+                   }
+                   Provincia provincia1 = provinciaRepository.findByNombre(provincia.getNombre()).get();
+                   localidad.setProvincia(provincia1);
+                   try { // Si la localidad ya existe, no se guarda
+                       localidadRepository.save(localidad);
+                   } catch (Exception e) {
+                       System.out.println("Localidad ya existente");
+                   }
+                   Localidad localidad1 = localidadRepository.findByNombre(localidad.getNombre()).get();
+                   monumento.setLocalidad(localidad1);
+
+                   System.out.println(monumento.getTipo());
+                   try {
+                       monumentoRepository.save(monumento);
+                   } catch (Exception e) {
+                       System.out.println("Monumento ya existente");
+                   }
+
+               }
+
+               System.out.println("Datos cargados correctamente");
+
+
+           } catch (JsonProcessingException e) {
+               throw new RuntimeException(e);
            }
-
-           for(HashMap<String, Object> monumentoHashMap : monumentosMap){
-               Monumento monumento = (Monumento) monumentoHashMap.get("monumento");
-               Localidad localidad = (Localidad) monumentoHashMap.get("localidad");
-               Provincia provincia = (Provincia) monumentoHashMap.get("provincia");
-
-               System.out.println("Provincia: " + provincia.getNombre());
-                System.out.println("Localidad: " + localidad.getNombre());
-                System.out.println("Monumento: " + monumento.getNombre());
-
-
-                try { // Si la provincia ya existe, no se guarda
-                    provinciaRepository.save(provincia);
-                }catch (Exception e){
-                    System.out.println("Provincia ya existente");
-                }
-               Provincia provincia1 = provinciaRepository.findByNombre(provincia.getNombre()).get();
-                localidad.setProvincia(provincia1);
-                try { // Si la localidad ya existe, no se guarda
-                    localidadRepository.save(localidad);
-                }catch (Exception e){
-                    System.out.println("Localidad ya existente");
-                }
-                Localidad localidad1 = localidadRepository.findByNombre(localidad.getNombre()).get();
-                monumento.setLocalidad(localidad1);
-
-                System.out.println(monumento.getTipo());
-                try
-                {
-                    monumentoRepository.save(monumento);
-                }catch (Exception e){
-                    System.out.println("Monumento ya existente");
-                }
-
-           }
-
-           System.out.println("Datos cargados correctamente");
-
-
-       } catch (JsonProcessingException e) {
-           throw new RuntimeException(e);
        }
    }
 }

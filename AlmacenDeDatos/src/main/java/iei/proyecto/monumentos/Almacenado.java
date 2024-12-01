@@ -13,7 +13,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.sql.DataSource;
+
 public class Almacenado {
+    private BDconexion conexion = new BDconexion();
+    DataSource dataSource = conexion.dataSource();
+    JdbcTemplate jdbcTemplate = conexion.jdbcTemplate(dataSource);
+
+    private LocalidadBD localidadBD = new LocalidadBD(jdbcTemplate);
+    private ProvinciaBD provinciaBD = new ProvinciaBD(jdbcTemplate);
+    private MonumentoBD monumentoBD = new MonumentoBD(jdbcTemplate);
 
     public Almacenado(){}
 
@@ -45,6 +59,10 @@ public class Almacenado {
     private Provincia transformarProvincia(ProvinciaJson provinciajson){
         Provincia provincia = new Provincia(Integer.parseInt(provinciajson.getCodigo()), provinciajson.getNombre());
         return  provincia;
+    }
+
+    private void almacenar(){
+
     }
 
 }

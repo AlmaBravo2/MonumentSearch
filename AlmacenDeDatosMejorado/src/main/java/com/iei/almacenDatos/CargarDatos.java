@@ -39,8 +39,8 @@ public class CargarDatos {
    public void cargarDatos(){
        ObjectMapper objectMapper = new ObjectMapper();
        monumentos.add(comunitatValenciana);
-       monumentos.add(euskadi);
-       monumentos.add(castillaYLeon);
+       //monumentos.add(euskadi);
+       //monumentos.add(castillaYLeon);
 
        for(String res : monumentos) {
            try {

@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac34ac7d-8413-4f56-a130-fdf3df6d6f77" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/src/main/java/com/iei/almacenDatos/Wrapper/Euskadi/Euskadi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/src/main/java/com/iei/almacenDatos/Wrapper/Euskadi/Logic/ConversorEuskadi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/src/main/java/com/iei/almacenDatos/Wrapper/Euskadi/Logic/JsonMonumento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/src/main/java/com/iei/almacenDatos/Wrapper/Euskadi/Models/MonumentoConvertidoEuskadi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/src/main/java/com/iei/almacenDatos/Wrapper/Euskadi/Models/MonumentoOrginalEuskadi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/src/main/java/com/iei/almacenDatos/Wrapper/Euskadi/Utils/MonumentoEuskadiLocator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/src/main/java/com/iei/almacenDatos/CargarDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../AlmacenDeDatosMejorado/src/main/java/com/iei/almacenDatos/CargarDatos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ac34ac7d-8413-4f56-a130-fdf3df6d6f77" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,7 +109,7 @@
       <workItem from="1732781021255" duration="983000" />
       <workItem from="1732963809233" duration="24000" />
       <workItem from="1733069940318" duration="893000" />
-      <workItem from="1733076147383" duration="1470000" />
+      <workItem from="1733076147383" duration="1663000" />
     </task>
     <servers />
   </component>

@@ -34,7 +34,7 @@ public class Monumento {
     @Column(name = "latitud", nullable = false)
     private String latitud;
 
-    @Column(name = "descripcion", length = 40, nullable = false)
+    @Column(name = "descripcion", length = 1000, nullable = false)
     private String descripcion;
 
     @Column(name = "tipo", nullable = false, length = 50)

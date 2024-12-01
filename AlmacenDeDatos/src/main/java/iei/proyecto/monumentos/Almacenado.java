@@ -1,24 +1,50 @@
 package iei.proyecto.monumentos;
 
-import iei.proyecto.monumentos.Models.Monumento;
-import iei.proyecto.monumentos.Models.Localidad;
-import iei.proyecto.monumentos.Models.Provincia;
+import iei.proyecto.monumentos.Models.*;
 
-import iei.proyecto.monumentos.BDconexion.BDconexion;
-import iei.proyecto.monumentos.BDconexion.MonumentoBD;
-import iei.proyecto.monumentos.BDconexion.ProvinciaBD;
-import iei.proyecto.monumentos.BDconexion.LocalidadBD;
+import iei.proyecto.monumentos.BDconexion.*;
+
+import iei.proyecto.monumentos.ModelsJson.*;
 
 import java.util.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.util.List;
 
 public class Almacenado {
 
     public Almacenado(){}
 
-    private void almacenar(List<Monumento> monumento){
-        for(Monumento monument: monumento){
+    /**
+     * Convierte una cadena JSON en una lista de objetos MonumentoJson.
+     *
+     * @param jsonString Cadena JSON que representa la lista de monumentos.
+     * @return Lista de objetos MonumentoJson.
+     * @throws IOException Si ocurre un error al deserializar el JSON.
+     */
+    public static List<MonumentoJson> deserializarMonumentos(String jsonString) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(jsonString, new TypeReference<List<MonumentoJson>>() {});
+    }
 
+    private void datosAlmacenar(List<MonumentoJson> monumento){
+        for(MonumentoJson monument: monumento){
+            Localidad localidad = transformarLocalidad(monument.getLocalidad(), monument.getProvincia());
+            Monumento monumentoAlmacenar = new Monumento(0, monument.getNombre(), monument.getDireccion(), monument.getCodigoPostal(), monument.getLongitud(), monument.getLatitud(), monument.getDescripcion(), Tipo.valueOf(monument.getTipo()), localidad);
         }
+    }
+
+    private Localidad transformarLocalidad(LocalidadJson localidadjson, ProvinciaJson provinviajson){
+        Provincia provincia = transformarProvincia(provinviajson);
+        Localidad localidad = new Localidad(0, localidadjson.getNombre(), provincia);
+        return localidad;
+    }
+
+    private Provincia transformarProvincia(ProvinciaJson provinciajson){
+        Provincia provincia = new Provincia(Integer.parseInt(provinciajson.getCodigo()), provinciajson.getNombre());
+        return  provincia;
     }
 
 }

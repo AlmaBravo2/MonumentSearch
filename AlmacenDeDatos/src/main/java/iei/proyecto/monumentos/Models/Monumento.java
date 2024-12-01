@@ -17,13 +17,13 @@ public class Monumento {
     private String direccion;
 
     @Column(name = "codigo_postal", nullable = false)
-    private int codigoPostal;
+    private String codigoPostal;
 
     @Column(name = "longitud", nullable = false)
-    private double longitud;
+    private String longitud;
 
     @Column(name = "latitud", nullable = false)
-    private double latitud;
+    private String latitud;
 
     @Column(name = "descripcion", length = 40, nullable = false)
     private String descripcion;
@@ -39,7 +39,7 @@ public class Monumento {
     // Constructor vacío
     public Monumento() {}
 
-    public Monumento(int id, String nombre, String direccion, int codigoPostal, double longitud, double latitud,
+    public Monumento(int id, String nombre, String direccion, String codigoPostal, String longitud, String latitud,
                      String descripcion, Tipo tipo, Localidad localidad) {
         this.id = id;
         this.nombre = nombre;
@@ -76,27 +76,27 @@ public class Monumento {
         this.direccion = direccion;
     }
 
-    public int getCodigoPostal() {
+    public String getCodigoPostal() {
         return codigoPostal;
     }
 
-    public void setCodigoPostal(int codigoPostal) {
+    public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
 
-    public double getLongitud() {
+    public String getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(double longitud) {
+    public void setLongitud(String longitud) {
         this.longitud = longitud;
     }
 
-    public double getLatitud() {
+    public String getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(double latitud) {
+    public void setLatitud(String latitud) {
         this.latitud = latitud;
     }
 

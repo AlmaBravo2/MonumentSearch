@@ -57,11 +57,8 @@ public class CargarDatos {
                    Localidad localidad = (Localidad) monumentoHashMap.get("localidad");
                    Provincia provincia = (Provincia) monumentoHashMap.get("provincia");
 
-                   System.out.println("Provincia: " + provincia.getNombre());
-                   System.out.println("Localidad: " + localidad.getNombre());
-                   System.out.println("Monumento: " + monumento.getNombre());
-
-
+                   provincia.setNombre(provincia.getNombre().toUpperCase());
+                   localidad.setNombre(localidad.getNombre().toUpperCase());
                    try { // Si la provincia ya existe, no se guarda
                        provinciaRepository.save(provincia);
                    } catch (Exception e) {
@@ -85,7 +82,6 @@ public class CargarDatos {
                    }
 
                }
-
                System.out.println("Datos cargados correctamente");
 
 

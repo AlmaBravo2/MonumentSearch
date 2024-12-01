@@ -1,13 +1,9 @@
-package org.example;
+package com.iei.almacenDatos.Wrapper.Euskadi.Logic;
 
-import org.example.Models.MonumentoConvertidoEuskadi;
-import org.example.Models.MonumentoOrginalEuskadi;
-import org.example.Utils.MonumentoEuskadiLocator;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import com.iei.almacenDatos.Wrapper.Euskadi.Models.MonumentoConvertidoEuskadi;
+import com.iei.almacenDatos.Wrapper.Euskadi.Models.MonumentoOrginalEuskadi;
+import com.iei.almacenDatos.Wrapper.Euskadi.Logic.JsonMonumento;
+import com.iei.almacenDatos.Wrapper.Euskadi.Utils.MonumentoEuskadiLocator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +12,10 @@ import java.util.Objects;
 
 public class ConversorEuskadi {
     
-    private static List<MonumentoOrginalEuskadi> monumentos = JsonMonumento.readJson("src/main/java/org/example/Data/edificiosEntrega.json");
-    
-    public static List<MonumentoConvertidoEuskadi> convertirEuskadi() {
+
+    public static List<MonumentoConvertidoEuskadi> convertirEuskadi(String filePath) {
+
+        List<MonumentoOrginalEuskadi> monumentos = JsonMonumento.readJson(filePath);
 
         List<MonumentoConvertidoEuskadi> monumentosConvertidos = new ArrayList<>();
         
@@ -75,8 +72,8 @@ public class ConversorEuskadi {
         return tipo;
     }
 
-    public static void main(String[] args) {
-        List<MonumentoConvertidoEuskadi> monumentosConvertidos = convertirEuskadi();
-        JsonMonumento.writeJson(monumentosConvertidos, "src/main/java/org/example/Data/monumentosEuskadiConvertidos.json");
+    public static String convertirEuskadiToJson(String filePath) {
+        List<MonumentoConvertidoEuskadi> monumentosConvertidos = convertirEuskadi(filePath);
+        return JsonMonumento.writeJson(monumentosConvertidos);
     }
 }

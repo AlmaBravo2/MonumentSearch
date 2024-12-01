@@ -1,4 +1,4 @@
-package org.example.Models;
+package com.iei.almacenDatos.Wrapper.Euskadi.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

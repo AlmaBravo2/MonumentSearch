@@ -1,4 +1,4 @@
-package org.example.Models;
+package com.iei.almacenDatos.Wrapper.Euskadi.Models;
 
 public class MonumentoConvertidoEuskadi {
     private String nombre;
@@ -10,6 +10,7 @@ public class MonumentoConvertidoEuskadi {
     private String descripcion;
     private String provincia;
     private String localidad;
+
 
 
     public MonumentoConvertidoEuskadi(String nombre, String tipo, String direccion, String codigoPostal, String latitud, String longitud, String descripcion, String provincia, String localidad) {

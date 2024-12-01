@@ -51,10 +51,15 @@ public class CargarDatos {
                 System.out.println("Localidad: " + localidad.getNombre());
                 System.out.println("Monumento: " + monumento.getNombre());
 
-               provinciaRepository.save(provincia);
+
+                try { // Si la provincia ya existe, no se guarda
+                    provinciaRepository.save(provincia);
+                }catch (Exception e){
+                    System.out.println("Provincia ya existente");
+                }
                Provincia provincia1 = provinciaRepository.findByNombre(provincia.getNombre()).get();
                 localidad.setProvincia(provincia1);
-                try {
+                try { // Si la localidad ya existe, no se guarda
                     localidadRepository.save(localidad);
                 }catch (Exception e){
                     System.out.println("Localidad ya existente");
@@ -63,7 +68,12 @@ public class CargarDatos {
                 monumento.setLocalidad(localidad1);
 
                 System.out.println(monumento.getTipo());
-                monumentoRepository.save(monumento);
+                try
+                {
+                    monumentoRepository.save(monumento);
+                }catch (Exception e){
+                    System.out.println("Monumento ya existente");
+                }
 
            }
 

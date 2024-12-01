@@ -10,9 +10,7 @@ public class AlmacenDatosApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(AlmacenDatosApplication.class, args);
-
 		CargarDatos cargarDatos = context.getBean(CargarDatos.class);
-
 		cargarDatos.cargarDatos();
 
 	}

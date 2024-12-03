@@ -1,0 +1,167 @@
+[
+  {
+    "nombre": "Ermita de La Antigua - Santa María de Zumarraga",
+    "tipo": "Iglesia-Ermita",
+    "direccion": "Beloki Hiribidea, s/n",
+    "codigo_postal": "20700",
+    "latitud": "43.09096533979687",
+    "longitud": "-2.303607169311588",
+    "descripcion": "La ermita de Santa María (La Antigua) de Zumarraga está considerada como la ca...",
+    "provincia": "Gipuzkoa",
+    "localidad": "Zumarraga"
+  },
+  {
+    "nombre": "Monasterio de Zenarruza",
+    "tipo": "Monasterio-Convento",
+    "direccion": "CL Zenarruza 11",
+    "codigo_postal": "58279",
+    "latitud": "43.24845524092432",
+    "longitud": "-2.561749469311503",
+    "descripcion": "Declarado Monumento Nacional de Euskadi, el Monasterio de Zenarruza, antigua colegiata, se encuen...",
+    "provincia": "Bizkaia",
+    "localidad": "Ziortza-Bolibar"
+  },
+  {
+    "nombre": "Torre de Doña Otxanda",
+    "tipo": "Castillo-Fortalez-Torre",
+    "direccion": "Calle Fundadora de las Siervas de Jesús, 24",
+    "codigo_postal": "01001",
+    "latitud": "42.8503186",
+    "longitud": "-2.674561400000016",
+    "descripcion": "La torre de Doña Otxanda es un bello edificio rematado por almenas. Es una de las muchas e...",
+    "provincia": "Araba/Álava",
+    "localidad": "Vitoria-Gasteiz"
+  },
+  {
+    "nombre": "Fuerte de Guadalupe",
+    "tipo": "Otro",
+    "direccion": "Carretera Jaizkibel GI-3440, barrio Gornutz Montaña",
+    "codigo_postal": "20280",
+    "latitud": "43.37004606341497",
+    "longitud": "-1.8176744549560575",
+    "descripcion": "El fuerte de Guadalupe es una de las construcciones defensivas más bellas de Hondarribia. ...",
+    "provincia": "Gipuzkoa",
+    "localidad": "Hondarribia"
+  },
+  {
+    "nombre": "Catedral del Buen Pastor",
+    "tipo": "Iglesia-Ermita",
+    "direccion": "Plaza del Buen Pastor, s/n",
+    "codigo_postal": "20005",
+    "latitud": "43.3167285180224",
+    "longitud": "-199.981534229360932",
+    "descripcion": "La Catedral del Buen Pastor es la construcción religiosa más grande de San Sebasti\u0026...",
+    "provincia": "Gipuzkoa",
+    "localidad": "Donostia / San Sebastián"
+  },
+  {
+    "nombre": "Paseo de los Arquillos",
+    "tipo": "Otro",
+    "direccion": "Entre las calles Mateo Benigno de Moraza y Cuesta de San Francisco  \u003cbr/\u003e",
+    "codigo_postal": "01001",
+    "latitud": "42.8471391",
+    "longitud": "-2.6715207",
+    "descripcion": "El paseo de los Arquillos, obra del arquitecto vitoriano Justo Antonio de Olaguíbel, se co...",
+    "provincia": "Araba/Álava",
+    "localidad": "Vitoria-Gasteiz"
+  },
+  {
+    "nombre": "Monasterio de Zenarruza",
+    "tipo": "Monasterio-Convento",
+    "direccion": "CL Zenarruza 11",
+    "codigo_postal": "48279",
+    "latitud": "43.24845524092432",
+    "longitud": "-2.561749469311503",
+    "descripcion": "Declarado Monumento Nacional de Euskadi, el Monasterio de Zenarruza, antigua colegiata, se encuen...",
+    "provincia": "Bizkaia",
+    "localidad": "Ziortza-Bolibar"
+  },
+  {
+    "nombre": "Puente de San Antón",
+    "tipo": "Otro",
+    "direccion": "Puente San Antón / San Antón zubia, Bilbao la Vieja, Ibaiondo, Bilbao, Bizkaia, Euskadi, 48005, España",
+    "codigo_postal": "48005",
+    "latitud": "43.25462710987754",
+    "longitud": "-2.9230499267578125",
+    "descripcion": "El Puente Antiguo de San Antón, junto a la iglesia del mismo nombre, forma parte del escud...",
+    "provincia": "Bizkaia",
+    "localidad": "Bilbao"
+  },
+  {
+    "nombre": "Teatro Arriaga",
+    "tipo": "Otro",
+    "direccion": "Plaza del Arriaga s/n",
+    "codigo_postal": "48005",
+    "latitud": "43.259542",
+    "longitud": "-2.924",
+    "descripcion": "El Teatro Arriaga de Bilbao fue diseñado en el siglo XIX por el arquitecto municipal Joaqu...",
+    "provincia": "Bizkaia",
+    "localidad": "Bilbao"
+  },
+  {
+    "nombre": "Plaza de la Constitución",
+    "tipo": "Otro",
+    "direccion": "Entre la calles de San Jerónimo, Puerto, Narrica, Pescadería e Iñigo.",
+    "codigo_postal": "20003",
+    "latitud": "43.32360527695042",
+    "longitud": "-1.9848800478850936",
+    "descripcion": "La Plaza de la Constitución, situada en el centro de la Parte Vieja de San Sebastiá...",
+    "provincia": "Gipuzkoa",
+    "localidad": "Donostia / San Sebastián"
+  },
+  {
+    "nombre": "Peine del Viento",
+    "tipo": "Otro",
+    "direccion": "Haizearen Orrazia - Peine del Viento, Ondarreta, Antiguo, Mendebaldea, Donostia/San Sebastián, Gipuzkoa, Euskadi, 20008, España",
+    "codigo_postal": "20008",
+    "latitud": "43.32180090053917",
+    "longitud": "-2.0062222566223227",
+    "descripcion": "Situado al final de la playa de Ondarreta, en el extremo oeste de San Sebastián y a los pi...",
+    "provincia": "Gipuzkoa",
+    "localidad": "Donostia / San Sebastián"
+  },
+  {
+    "nombre": "Ermita de Santa Águeda",
+    "tipo": "Iglesia-Ermita",
+    "direccion": "Barrio de Galartza",
+    "codigo_postal": "20577",
+    "latitud": "43.11376192423708",
+    "longitud": "-2.3921941171965955",
+    "descripcion": "La ermita, que antiguamente estaba dedicada a San Lorenzo, se sitúa fuera del casco urbano...",
+    "provincia": "Gipuzkoa",
+    "localidad": "Antzuola"
+  },
+  {
+    "nombre": "Puente de Trespuentes",
+    "tipo": "Otro",
+    "direccion": "Carretera A-3306, Trespuentes",
+    "codigo_postal": "01191",
+    "latitud": "42.84394280000001",
+    "longitud": "-2.7885427999999592",
+    "descripcion": "El puente de Trespuentes une las dos orillas del río Zadorra desde tiempos remotos. Sobre ...",
+    "provincia": "Araba/Álava",
+    "localidad": "Iruña Oka/Iruña de Oca"
+  },
+  {
+    "nombre": "Molino de Zamakola",
+    "tipo": "Otro",
+    "direccion": "Barrio Indusi",
+    "codigo_postal": "48141",
+    "latitud": "43.116919412204155",
+    "longitud": "-2.725833378018261",
+    "descripcion": "Aunque se desconoce la fecha de su fundación, se sabe que en este lugar existía un ...",
+    "provincia": "Bizkaia",
+    "localidad": "Dima"
+  },
+  {
+    "nombre": "Castillo de Portilla",
+    "tipo": "Castillo-Fortalez-Torre",
+    "direccion": "Portillako gaztelua/Castillo de Portilla, Zabalateko bidea / Camino a Portilla, Portilla/Zabalate, Zambrana, Añanako kuadrilla/Cuadrilla de Añana, Araba/Álava, Euskadi, 01212, España",
+    "codigo_postal": "01212",
+    "latitud": "42.6703698",
+    "longitud": "-2.8336449",
+    "descripcion": "La edificación defensiva del Castillo de Portilla, Zabaletako Gaztelua en euskera, se cons...",
+    "provincia": "Araba/Álava",
+    "localidad": "Zambrana"
+  }
+]

@@ -3,8 +3,8 @@ package iei.proyecto.monumentos.Models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Localidad")
-public class Localidad {
+@Table(name = "Provincia")
+public class Provincia {
 
     @Id
     @Column(name = "codigo")
@@ -13,16 +13,11 @@ public class Localidad {
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "provincia_codigo", nullable = false)
-    private Provincia provincia;
+    public Provincia() {}
 
-    public Localidad() {}
-
-    public Localidad(int codigo, String nombre, Provincia provincia) {
+    public Provincia(int codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.provincia = provincia;
     }
 
     public int getCodigo() {
@@ -39,13 +34,5 @@ public class Localidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Provincia getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(Provincia provincia) {
-        this.provincia = provincia;
     }
 }

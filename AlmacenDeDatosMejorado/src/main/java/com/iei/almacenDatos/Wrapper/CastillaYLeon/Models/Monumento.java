@@ -4,7 +4,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class Monumento {
 
-
+    //MAPEO DE LOS ELEMENTOS DEL XML A LOS DE LA CLASE JAVA
     @JacksonXmlProperty(localName = "nombre")
     private String nombre;
 
@@ -23,9 +23,6 @@ public class Monumento {
     @JacksonXmlProperty(localName = "provincia")
     private String provincia;
 
-   /* @JacksonXmlProperty(localName = "municipio")
-    private String municipio;*/
-
     @JacksonXmlProperty(localName = "localidad")
     private String localidad;
 
@@ -35,11 +32,6 @@ public class Monumento {
     @JacksonXmlProperty(localName = "longitud")
     private String longitud;
 
-    /*@JacksonXmlProperty(localName = "poblacion")
-    private Poblacion poblacion;
-
-    @JacksonXmlProperty(localName = "coordenadas")
-    private Coordenadas coordenadas;*/
 
     // Getters y setters
     public String getNombre() {
@@ -89,13 +81,6 @@ public class Monumento {
         this.provincia = provincia;
     }
 
-   /* public String getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }*/
 
     public String getLocalidad() {
         return localidad;

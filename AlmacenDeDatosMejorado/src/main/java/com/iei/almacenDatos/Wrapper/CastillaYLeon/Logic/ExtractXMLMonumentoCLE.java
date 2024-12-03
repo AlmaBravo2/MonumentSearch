@@ -21,37 +21,46 @@ import static com.iei.almacenDatos.Wrapper.CastillaYLeon.Utils.MonumentLocator.g
 public class ExtractXMLMonumentoCLE {
 
     public static List<Monumento> readXML(String filePath) {
+
+        //CREAMOS UNA LISTA DONDE ALMACENAREMOS LOS MONUMENTOS CONVERTIDOS AL MODELO JAVA
         List<Monumento> monumentos = new ArrayList<>();
 
         try {
-            // Crear el DocumentBuilder para procesar el XML
+            // CREAMOS UN DOCUMENTBUILDER, QUE SERVIRÁ PARA ANALIZAR EL XML
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            // Leer el archivo XML
+            // SE LEE EL ARCHIVO XML
             Document doc = builder.parse(new File(filePath));
             doc.getDocumentElement().normalize();
 
-            // Obtener todos los nodos <monumento>
+            // SE OBTIENEN TODOS LOS NODOS <MONUMENTO> DEL XML EN UNA LISTA
             NodeList nodeList = doc.getElementsByTagName("monumento");
 
+            //RECORREMOS LA NODELIST PASANDO POR CADA MONUMENTO DE LA LISTA
             for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
 
+                Node node = nodeList.item(i);
+                //SE VERIFICA QUE EL NODO ACTUAL ES UN ELEMENTO XML VÁLIDO Y
+                // SE CONVIERTE A ELEMENT, LO QUE PERMITE ACCEDER DIRECTAMENTE AL CONTENIDO DEL ELEMENTO XML
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
+
+                    //CREAMOS NUEVO OBJETO 'MONUMENTO' DONDE ALMACENAREMOS LOS DATOS EXTRAÍDOS DEL XML DE ESE MONUMENTO
                     Monumento monumento = new Monumento();
 
-                    // NOMBRE
+                    // ELEMENTO NOMBRE
                     monumento.setNombre(getTagValue("nombre", element));
 
-                    // Extraer datos de <coordenadas>
+                    // ELEMENTO COORDENADAS, QUE CONTIENE LATITUD Y LONGITUD
                     Element coordenadas = null;
                     NodeList coordenadasNodes = element.getElementsByTagName("coordenadas");
+
                     if (coordenadasNodes != null && coordenadasNodes.getLength() > 0) {
-                        //Element coordenadas = (Element) element.getElementsByTagName("coordenadas").item(0);
+                        //OBTIENE EL NODO 'COORDENADAS' DEL MONUMENTO
                         coordenadas = (Element) coordenadasNodes.item(0);
-                        //Monumento.Coordenadas coord = new Monumento.Coordenadas();
+                        //SI LOS VALORES DE LATITUD Y LONGITUD NO SON NULOS NI ESTÁN VACÍOS,
+                        //SE LIMPIA SU FORMATO POR SI ACASO HAY ALGUNA ERRATA Y SE ASIGNAN
                         if((getTagValue("latitud", coordenadas) != null && !getTagValue("latitud", coordenadas).isEmpty() ) && (getTagValue("longitud", coordenadas) != null && !getTagValue("longitud", coordenadas).isEmpty())){
                             String latitud = getTagValue("latitud", coordenadas);
                             String longitud = getTagValue("longitud", coordenadas);
@@ -61,21 +70,18 @@ public class ExtractXMLMonumentoCLE {
 
                             monumento.setLatitud(latitud);
                             monumento.setLongitud(longitud);
-
-
                         }else{
+                            //EN CASO DE QUE ALGUNA DE LAS COORDENADAS SEA NULA O ESTÉ VACÍA,
+                            //SE OBTIENEN LAS COORDENADAS A TRAVÉS DEL NOMBRE DEL MONUMENTO
                             HashMap<String,String> coordenadasAPI = getCoordinates(getTagValue("nombre", element));
                             String longitudAPI = coordenadasAPI.get("longitud");
                             String latitudAPI = coordenadasAPI.get("latitud");
                             monumento.setLongitud(longitudAPI);
                             monumento.setLatitud(latitudAPI);
                         }
-                        //monumento.setLatitud(getTagValue("latitud", coordenadas));
-                        //monumento.setLongitud(getTagValue("longitud", coordenadas));
-                        //monumento.setCoordenadas(coord);
                     }
 
-                    // TIPO DE MONUMENTO: CONVERTIMOS LOS TIPOS
+                    // ELEMENTO TIPO: CONVERTIMOS LOS TIPOS DE MONUMENTOS
                     if(searchTipo("Yacimientos arqueológicos", element)){
                         monumento.setTipo("Yacimiento arqueológico");
                     }else if(searchTipo("Catedrales", element) || searchTipo("Iglesias y ermitas", element)
@@ -95,75 +101,58 @@ public class ExtractXMLMonumentoCLE {
                         monumento.setTipo("Otros");
                     }
 
+                    //ELEMENTO DESCRIPCION
                     String descrip = getTagValue("Descripcion", element);
                     if (descrip != null) {
-                        // LIMPIAMOS EL FORMATO
+                        // LIMPIAMOS EL FORMATO ELIMINANDO ETIQUETAS HTML CON LA BIBLIOTECA JSOUP,
+                        //QUE SIRVE PARA ANALIZAR Y MANIPULAR DATOS HTML
                         String sinHtml = Jsoup.parse(descrip).text();
+
+                        //SE USA LA BIBLIOTECA APACHE COMMONS TEXT PARA DECODIFICAR CUALQUIER CARACTER
+                        //ESPECIAL CODIFICADO EN FORMATO HTML
                         String convertirCaract = StringEscapeUtils.unescapeHtml4(sinHtml);
                         monumento.setDescripcion(convertirCaract);
                     } else {
-                        /*HttpResponse<String> respuestaAPIInfo = MonumentLocator.getMonumentLocationInfo(monumento.getLongitud(),monumento.getLatitud());
-                        assert respuestaAPIInfo != null;
-                        String info = respuestaAPIInfo.toString();*/
+                        //SI EL MONUMENTO NO TIENE DESCRIPCIÓN, PONEMOS COMO DESCRIPCIÓN EL TIPO DE MONUMENTO
                         String info = monumento.getTipo();
                         monumento.setDescripcion(info);
                     }
 
-                    // DATOS DE POBLACIÓN: PROVINCIA, MUNICIPIO, LOCALIDAD
+                    //ELEMENTO POBLACIÓN, QUE CONTIENE PROVINCIA Y LOCALIDAD
                     Element poblacion = null;
                     NodeList poblacionNodes = element.getElementsByTagName("poblacion");
                     if (poblacionNodes != null && poblacionNodes.getLength() > 0) {
-                        //poblacion = (Element) element.getElementsByTagName("poblacion").item(0);
+                        //OBTIENE EL NODO 'POBLACION' DEL MONUMENTO
                         poblacion = (Element) poblacionNodes.item(0);
-                       // Monumento.Poblacion pob = new Monumento.Poblacion();
                         monumento.setProvincia(getTagValue("provincia", poblacion));
-                        //monumento.setMunicipio(getTagValue("municipio", poblacion));
                         monumento.setLocalidad(getTagValue("localidad", poblacion));
-                        //monumento.setPoblacion(pob);
                     }
 
-                    // CALLE
+                    //ELEMENTO DIRECCION
                     String calle;
                     String calleNodes = getTagValue("direccion", element);
                     if(calleNodes != null){
                         calle = calleNodes;
                     } else {
+                        //SI LA DIRECCION ES NULL, OBTENEMOS LA DIRECCION A PARTIR DE LAS COORDENADAS
                         calle = MonumentLocator.getMonumentDirection(monumento.getLongitud(),monumento.getLatitud());
-                        //calle = "desconocido";
                     }
                     monumento.setDireccion(calle);
-                    /*ANTERIOR BIEN String calle = getTagValue("calle", element);
-                    if (calle == null || calle.isEmpty()) {
-                        // Llamar a MonumentLocator.getMonumentDirection(latitud, longitud) si calle es null
-                        String latitud = monumento.getLatitud();
-                        String longitud = monumento.getLongitud();
-                        if (latitud != null && longitud != null) {
-                            calle = MonumentLocator.getMonumentDirection(latitud, longitud);
-                        }else {
-                            System.err.println("No se puede obtener la dirección porque las coordenadas son nulas para este monumento.");
-                            calle = "Dirección desconocida"; // Valor predeterminado
-                        }
-                    }*/
 
-
-                    //monumento.setCalle(getTagValue("calle", element));
-
-                    // CÓDIGO POSTAL
+                    //ELEMENTO CÓDIGO POSTAL
                     String codPostal = getTagValue("codigoPostal", element);
                     if (codPostal == null || codPostal.isEmpty()) {
-                        // Llamar a MonumentLocator.getMonumentDirection(latitud, longitud) si calle es null
+                        //SI EL CODIGO POSTAL ES NULL, SE OBTIENE A PARTIR DE LAS COORDENADAS
                         String latitud = monumento.getLatitud();
                         String longitud = monumento.getLongitud();
-                        /*if (latitud != null && longitud != null) {
-                            codPostal = MonumentLocator.getMonumentPostCode(latitud, longitud);
-                        }*/
                         String codigoPostalAPI = MonumentLocator.getMonumentPostCode(longitud,latitud);
                         monumento.setCodigo_postal(codigoPostalAPI);
                     }else {
+                        //SI NO ES NULL, COMPROBAMOS QUE EL CÓDIGO COINCIDE CORRECTAMENTE CON LA PROVINCIA
                         String codPostalRefactor = comparisonPostalCode(monumento.getProvincia(),codPostal);
                         monumento.setCodigo_postal(codPostalRefactor);
                     }
-                    // AÑADIMOS MONUMENTO A LA LISTA
+                    // AÑADIMOS EL MONUMENTO A LA LISTA
                     monumentos.add(monumento);
                 }
             }
@@ -174,27 +163,32 @@ public class ExtractXMLMonumentoCLE {
         return monumentos;
     }
 
-    // Método auxiliar para obtener el texto de un tag
+    //MÉTODO PARA OBTENER EL CONTENIDO DE UN NODO XML
     private static String getTagValue(String tagName, Element element) {
 
         if (element == null) {
             return null;
         }
-
+        //SE OBTIENE UNA LISTA DE LOS NODOS QUE COINCIDEN CON EL NOMBRE DE LA ETIQUETA 'tagName'
+        //EN ESE ELEMENTO MONUMENTO
         NodeList nodeList = element.getElementsByTagName(tagName);
         if (nodeList != null && nodeList.getLength() > 0) {
             Node node = nodeList.item(0);
             if (node != null && node.getNodeType() == Node.ELEMENT_NODE) {
+                //SE EXTRAE EL CONTENIDO DEL NODO, QUE SERÁ LA INFORMACIÓN DESEADA
                 return node.getTextContent();
             }
         }
         return null;
     }
 
+    //MÉTODO USADO PARA CONVERTIR LOS TIPOS DE MONUMENTO
+    //SE COMPRUEBA SI EL CONTENIDO DE LA ETIQUETA 'TIPOMONUMENTO' CONTIENE EL TIPO QUE SE PASA COMO ARGUMENTO
     private static boolean searchTipo(String tipo, Element element){
         return Objects.requireNonNull(getTagValue("tipoMonumento", element)).contains(tipo);
     }
 
+    //MÉTODO PARA RELACIÓN PROVINCIA-CÓDIGO POSTAL
     public static String comparisonPostalCode(String provincia, String postalCode) {
         Map<String, String> postalCodesProvincias = new HashMap<>();
         postalCodesProvincias.put("24", "León");

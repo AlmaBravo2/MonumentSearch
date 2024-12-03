@@ -11,6 +11,7 @@ import com.iei.almacenDatos.Models.Provincia;
 import com.iei.almacenDatos.Repositories.LocalidadRepository;
 import com.iei.almacenDatos.Repositories.MonumentoRepository;
 import com.iei.almacenDatos.Repositories.ProvinciaRepository;
+import com.iei.almacenDatos.Wrapper.CastillaYLeon.CastillaYLeon;
 import com.iei.almacenDatos.Wrapper.ComunitatValenciana.ComunitatValenciana;
 import com.iei.almacenDatos.Wrapper.Euskadi.Euskadi;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,7 @@ public class CargarDatos {
     private List<String> monumentos = new ArrayList<>();
     private final String comunitatValenciana = ComunitatValenciana.main("src/main/java/com/iei/almacenDatos/DataToTest/bienes_inmuebles_interes_cultural.csv");
     private final String euskadi = Euskadi.main("src/main/java/com/iei/almacenDatos/DataToTest/edificios.json");
-    //private final String castillaYLeon =
+    private final String castillaYLeon = CastillaYLeon.main("src/main/java/com/iei/almacenDatos/DataToTest/monumentos.xml");
 
     public CargarDatos(MonumentoRepository monumentoRepository, LocalidadRepository localidadRepository, ProvinciaRepository provinciaRepository) {
         this.monumentoRepository = monumentoRepository;
@@ -41,7 +42,7 @@ public class CargarDatos {
        ObjectMapper objectMapper = new ObjectMapper();
        monumentos.add(comunitatValenciana);
        monumentos.add(euskadi);
-       //monumentos.add(castillaYLeon);
+       monumentos.add(castillaYLeon);
 
        for(String res : monumentos) {
            try {

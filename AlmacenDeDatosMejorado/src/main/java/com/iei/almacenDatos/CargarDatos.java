@@ -75,7 +75,6 @@ public class CargarDatos {
                    Localidad localidad1 = localidadRepository.findByNombre(localidad.getNombre()).get();
                    monumento.setLocalidad(localidad1);
 
-                   System.out.println(monumento.getTipo());
                    try {
                        monumentoRepository.save(monumento);
                    } catch (Exception e) {

@@ -15,7 +15,8 @@ import java.util.List;
 public class JsonMonumento {
 
 
-
+// Leer el json como string y convertirlo a una lista de objetos de tipo MonumentoOrginalEuskadi
+//quitando el valor repetido address buscando el patrón address":""
    public static List<MonumentoOrginalEuskadi> readJson(String filePath) {
        ObjectMapper objectMapper = new ObjectMapper();
        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -27,6 +28,7 @@ public class JsonMonumento {
        try {
            String jsonContent = readFileAsString(filePath);
 
+
            String cleanedJson = jsonContent.replaceAll("\"address\"\\s*:\\s*\"\",?", "");
            monumentos = objectMapper.readValue(cleanedJson, new TypeReference<List<MonumentoOrginalEuskadi>>() {});
        } catch (IOException e) {
@@ -36,6 +38,8 @@ public class JsonMonumento {
 
     }
 
+
+    //Leer el archivo como string tomando los objetos cada uno en una linea diferente
     private static String readFileAsString(String filePath) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -48,7 +52,7 @@ public class JsonMonumento {
     }
 
 
-
+//Convertir la lista de objetos de tipo MonumentoConvertidoEuskadi a un json
     public static String writeJson(List<MonumentoConvertidoEuskadi> monumentos) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
             return gson.toJson(monumentos);

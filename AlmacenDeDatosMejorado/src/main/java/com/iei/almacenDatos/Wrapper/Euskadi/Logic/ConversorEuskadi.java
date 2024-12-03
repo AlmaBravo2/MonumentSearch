@@ -82,6 +82,7 @@ public class ConversorEuskadi {
         return tipo;
     }
 
+    //Conversor a Monumento Convertido y escritura a json
     public static String convertirEuskadiToJson(String filePath) {
         List<MonumentoConvertidoEuskadi> monumentosConvertidos = convertirEuskadi(filePath);
         return JsonMonumento.writeJson(monumentosConvertidos);

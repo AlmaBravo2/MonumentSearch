@@ -6,6 +6,7 @@ import com.iei.apiBusqueda.Models.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BusquedaService {
@@ -13,37 +14,29 @@ public class BusquedaService {
     @Autowired
     private MonumentRepository monumentRepository;
 
-    public List<MonumentoDTO> monumentSearch(String localidad, String codPostal, String provincia, String tipo){
-
-        List<MonumentoDTO> res = new ArrayList<>();
+    public List<MonumentoDTO> monumentSearch(String localidad, String codPostal, String provincia, String tipo) {
+        // Obtén todos los monumentos del repositorio
         List<Monumento> monumentos = monumentRepository.findAll();
 
-        if(localidad != null){
-           for(Monumento monumento : monumentos){
-               if(!monumento.getLocalidad().getNombre() .equals(localidad)) monumentos.remove(monumento);
-           }
-        }
+        // Filtra los monumentos según los criterios proporcionados
+        List<Monumento> filtrados = monumentos.stream()
+                .filter(monumento -> localidad == null || localidad.equals(monumento.getLocalidad().getNombre()))
+                .filter(monumento -> codPostal == null || codPostal.equals(monumento.getCodigoPostal()))
+                .filter(monumento -> provincia == null || provincia.equals(monumento.getLocalidad().getProvincia().getNombre()))
+                .filter(monumento -> tipo == null || tipo.equals(monumento.getTipo()))
+                .collect(Collectors.toList());
 
-        if(codPostal != null){
-            for(Monumento monumento : monumentos){
-                if(!monumento.getCodigoPostal().equals(codPostal)) monumentos.remove(monumento);
-            }
-        }
-
-        if(provincia != null){
-            for(Monumento monumento : monumentos){
-                if(!monumento.getLocalidad().getProvincia().getNombre().equals(provincia)) monumentos.remove(monumento);
-            }
-        }
-        if(tipo != null){
-            for(Monumento monumento : monumentos){
-                if(!monumento.getTipo().equals(tipo)) monumentos.remove(monumento);
-            }
-        }
-        for(Monumento monumento : monumentos){
-            MonumentoDTO monumentoDTO = new MonumentoDTO(monumento,monumento.getLocalidad(),monumento.getLocalidad().getProvincia());
+        // Convierte los monumentos filtrados a DTOs
+        List<MonumentoDTO> res = new ArrayList<>();
+        for (Monumento monumento : filtrados) {
+            MonumentoDTO monumentoDTO = new MonumentoDTO(
+                    monumento,
+                    monumento.getLocalidad(),
+                    monumento.getLocalidad().getProvincia()
+            );
             res.add(monumentoDTO);
         }
+
         return res;
     }
 }

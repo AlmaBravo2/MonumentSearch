@@ -1,4 +1,4 @@
-package com.wrapper.comunidadValenciana.Models;
+package com.iei.apiCarga.Models;
 
 
 import java.util.Objects;

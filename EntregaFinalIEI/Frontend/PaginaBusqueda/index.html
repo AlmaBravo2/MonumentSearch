@@ -10,20 +10,32 @@
 <body>
 <h1 class="title">Buscador de monumentos de interés cultural</h1>
 <div class="horizontal">
-    <p class="regular-text">Localidad:</p>
-    <input type="text">
+    <div class="horizontal">
+        <p class="regular-text">Localidad:</p>
+        <input type="text" id="locality">
+    </div>
+    <div class="horizontal">
+        <p class="regular-text" id="postal_code">Cód Postal:</p>
+        <input type="text">
+    </div>
+    <div class="horizontal">
+        <p class="regular-text" id="provincia">Provincia:</p>
+        <input type="text">
+    </div>
+    <div class="horizontal">
+        <p class="regular-text">Tipo:</p>
+        <select id="type">
+            <option value="Yacimiento arqueológico">Yacimiento Arqueológico</option>
+            <option value="Iglesia-Ermita">Iglesia-Ermita</option>
+        </select>
+
+    </div>
+
+    <div id="mapa_guay"></div>
+
+
 </div>
-<div class="horizontal">
-    <p class="regular-text">Cód Postal:</p>
-    <input type="text">
-</div>
-<div class="horizontal">
-    <p class="regular-text">Provincia:</p>
-    <input type="text">
-</div>
-<div class="horizontal">
-    <p class="regular-text">Tipo:</p>
-</div>
+
 
 </body>
 </html>

@@ -7,7 +7,7 @@ const regionCheckboxes = document.querySelectorAll(".region");
 selectAllCheckbox.addEventListener("change", function() {
    if(selectAllCheckbox.checked){
        regionCheckboxes.forEach(function(checkbox){
-           checkbox.checked = false;
+           checkbox.checked = true;
        });
    }
 });

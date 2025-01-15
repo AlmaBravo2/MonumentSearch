@@ -6,40 +6,63 @@ import com.wrapper.comunidadValenciana.Models.Monumento;
 import com.wrapper.comunidadValenciana.Models.MonumentoConvertido;
 import com.wrapper.comunidadValenciana.Models.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.wrapper.comunidadValenciana.Models.*;
+import com.wrapper.comunidadValenciana.Utils.LevenshteinComparator;
 import com.wrapper.comunidadValenciana.Utils.MonumentLocator;
 
 import static com.wrapper.comunidadValenciana.Logic.ConvertidorCoordenadas.convertirCoordenadas;
 
 public class Convertidor {
 
+    private static String informe = "<-------------------VALENCIA---------------------->\n";
+    private static HashMap<String,String> rechazados = new HashMap<>();
+    private static HashMap<String,String> modificados = new HashMap<>();
+    private static int contadorDeCorrectos = 0;
+
     // Crear el objeto MONUMENTO que se enviará a través de la API
     private static Monumento convertirMonumento(MonumentoConvertido monumento) {
+
         String nombre = monumento.getDenominacion();
         String tipo = getTipo(monumento);
         String provinciaNombre = monumento.getProvincia();
+
+        if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "ALICANTE") < 3  && !provinciaNombre.equals("ALICANTE")) {
+            modificados.put(nombre,"Error tipográfico en el nombre de la provincia");
+            provinciaNombre = "ALICANTE";
+        }
+        else if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "CASTELLÓN") < 2  && !provinciaNombre.equals("CASTELLÓN")) {
+            modificados.put(nombre,"Error tipográfico en el nombre de la provincia");
+            provinciaNombre = "CASTELLÓN";
+        }
+        else if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "VALENCIA") < 2  && !provinciaNombre.equals("VALENCIA")) {
+            modificados.put(nombre,"Error tipográfico en el nombre de la provincia");
+            provinciaNombre = "VALENCIA";
+        }
+
         String municipio = monumento.getMunicipio();
         String latitud = monumento.getLatitud();
         String longitud = monumento.getLongitud();
         if(latitud.equals("") || latitud.equals("") ||latitud.equals("NaN") || latitud.equals("NaN")) {
+            rechazados.put(nombre,"No tiene coordenadas");
             return null;
             // Si no se tienen las coordenadas, no se puede crear el monumento
         }
         String descripcion = monumento.getClasificacion();
         String codPostal = MonumentLocator.getMonumentPostCode(latitud, longitud);
-        if(codPostal.startsWith("3")) provinciaNombre = "ALICANTE";
-        else if(codPostal.startsWith("12")) provinciaNombre = "CASTELLÓN";
-        else if(codPostal.startsWith("46")) provinciaNombre = "VALENCIA";
+        if(codPostal.startsWith("3") && !provinciaNombre.equals("ALICANTE")) {modificados.put(nombre,"Nombre de provincia no concordante con el códifo postal");provinciaNombre = "ALICANTE";}
+        else if(codPostal.startsWith("12") && !provinciaNombre.equals("CASTELLÓN")) {modificados.put(nombre,"Nombre de provincia no concordante con el códifo postal");provinciaNombre = "CASTELLÓN";}
+        else if(codPostal.startsWith("46") && !provinciaNombre.equals("VALENCIA")) {modificados.put(nombre,"Nombre de provincia no concordante con el códifo postal");provinciaNombre = "VALENCIA";}
 
         Provincia provincia = new Provincia(Integer.parseInt(codPostal.substring(0, 2)), provinciaNombre);
         Localidad localidad = new Localidad();
         localidad.setNombre(municipio);
         localidad.setProvincia(provincia);
         String direccion = MonumentLocator.getMonumentDirection(latitud, longitud);
-        Monumento monumentoConvertido = new Monumento(nombre, tipo, direccion, codPostal, longitud, latitud, descripcion, localidad, provincia);
+        Monumento monumentoConvertido = new Monumento(nombre, tipo, direccion, codPostal, longitud, latitud, descripcion, localidad);
         return monumentoConvertido;
     }
 
@@ -60,7 +83,7 @@ public class Convertidor {
     }
 
     // MÉTODO QUE A PARTIR DE LOS MONUMENTOS CON LAS COORDENADAS CORREGIDAS, CREA UNA LISTA DE MONUMENTOS DEFINITIVOS.
-    public static List<Monumento> getMonumentos(String filePath) {
+    public static MonumentosDTO getMonumentos(String filePath) {
         List<MonumentoConvertido> monumentosConvertidos = convertirCoordenadas(filePath);
         List<Monumento> monumentos = new ArrayList<>();
         int total = monumentosConvertidos.size();
@@ -68,6 +91,7 @@ public class Convertidor {
         for (MonumentoConvertido monumento : monumentosConvertidos) {
                 Monumento monumentoConvertido = convertirMonumento(monumento);
                 if (monumentoConvertido != null) {
+                    contadorDeCorrectos++;
                     monumentos.add(monumentoConvertido);
                     System.out.println(String.format("Monumento %d / %d", contador, total));
                     contador++;
@@ -77,12 +101,17 @@ public class Convertidor {
                     contador++;
                 }
         }
-        return monumentos.stream().distinct().collect(Collectors.toList());
+
+        informe += "Monumentos correctos: " + contadorDeCorrectos + "\n";
+        informe += "Monumentos rechazados: " + rechazados.size() + " -> Desglose: "+ rechazados.toString() + "\n";
+        informe += "Monumentos modificados: " + modificados.size() + " -> Desglose: "+ modificados.toString() + "\n";
+        return new MonumentosDTO(monumentos.stream().distinct().collect(Collectors.toList()), informe);
     }
 
     // MÉTODO QUE CONVIERTE UNA LISTA DE MONUMENTOS A UN STRING JSON
-    public static String monumentosToJSON(List<Monumento> monumentos) {
+    public static String monumentosToJSON(MonumentosDTO mdto) {
         ObjectMapper mapper = new ObjectMapper();
+        List<Monumento> monumentos = mdto.getMonumentos();
         monumentos.removeIf(monumento -> monumento == null);
         try {
             return mapper.writeValueAsString(monumentos);
@@ -94,7 +123,7 @@ public class Convertidor {
     }
 
     public static String convertidor(String filePath) {
-        List<Monumento> monumentos = getMonumentos(filePath);
+        MonumentosDTO monumentos = getMonumentos(filePath);
         return monumentosToJSON(monumentos);
     }
 

@@ -1,6 +1,8 @@
 package com.wrapper.comunidadValenciana.Models;
 
 
+import java.util.Objects;
+
 public class Monumento {
     private String nombre;
     private String tipo;
@@ -10,9 +12,8 @@ public class Monumento {
     private String latitud;
     private String descripcion;
     private Localidad localidad;
-    private Provincia provincia;
 
-    public Monumento(String nombre, String tipo, String direccion, String codigo_postal, String longitud, String latitud, String descripcion, Localidad localidad, Provincia provincia) {
+    public Monumento(String nombre, String tipo, String direccion, String codigo_postal, String longitud, String latitud, String descripcion, Localidad localidad) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.direccion = direccion;
@@ -21,7 +22,7 @@ public class Monumento {
         this.latitud = latitud;
         this.descripcion = descripcion;
         this.localidad = localidad;
-        this.provincia = provincia;
+
     }
 
     public Monumento(){}
@@ -58,9 +59,6 @@ public class Monumento {
         return localidad;
     }
 
-    public Provincia getProvincia() {
-        return provincia;
-    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -94,8 +92,17 @@ public class Monumento {
         this.localidad = localidad;
     }
 
-    public void setProvincia(Provincia provincia) {
-        this.provincia = provincia;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Monumento monumento = (Monumento) o;
+        return Objects.equals(nombre, monumento.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre);
     }
 
 
@@ -110,7 +117,6 @@ public class Monumento {
                 ", latitud='" + latitud + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", localidad=" + localidad +
-                ", provincia=" + provincia +
                 '}';
     }
 

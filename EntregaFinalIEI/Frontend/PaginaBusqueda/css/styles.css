@@ -43,10 +43,10 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-#mapa_guay{
+#contenedor-del-mapa{
     background-color: aquamarine;
-    height: 400px;
-    width: 400px;
+    height: 500px;
+    width: 500px;
     margin-left: 50px;
 
 }

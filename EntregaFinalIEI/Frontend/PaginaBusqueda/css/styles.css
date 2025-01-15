@@ -23,3 +23,8 @@ body{
     font-family: "Arial Nova";
     font-size: 20px;
 }
+
+#mapa_guay{
+    background-color: aquamarine;
+    height: 200px;
+}

@@ -20,10 +20,10 @@ public class BusquedaService {
 
         // Filtra los monumentos según los criterios proporcionados
         List<Monumento> filtrados = monumentos.stream()
-                .filter(monumento -> localidad == null || localidad.equals(monumento.getLocalidad().getNombre()))
-                .filter(monumento -> codPostal == null || codPostal.equals(monumento.getCodigoPostal()))
-                .filter(monumento -> provincia == null || provincia.equals(monumento.getLocalidad().getProvincia().getNombre()))
-                .filter(monumento -> tipo == null || tipo.equals(monumento.getTipo()))
+                .filter(monumento -> localidad.equals("null") || localidad.equals(monumento.getLocalidad().getNombre()))
+                .filter(monumento -> codPostal.equals("null") || codPostal.equals(monumento.getCodigoPostal()))
+                .filter(monumento -> provincia.equals("null") || provincia.equals(monumento.getLocalidad().getProvincia().getNombre()))
+                .filter(monumento -> tipo.equals("null") || tipo.equals(monumento.getTipo()))
                 .collect(Collectors.toList());
 
         // Convierte los monumentos filtrados a DTOs

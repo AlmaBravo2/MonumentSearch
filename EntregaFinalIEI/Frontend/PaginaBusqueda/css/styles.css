@@ -1,0 +1,25 @@
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    font-family: "Arial Nova";
+    justify-content: center;
+}
+body{
+    margin-left: 50px;
+    padding: 30px;
+    background: #f5f5f5;
+}
+.horizontal {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+
+}
+
+.regular-text{
+    font-family: "Arial Nova";
+    font-size: 20px;
+}

@@ -42,7 +42,7 @@ public class CargaController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error al cargar los datos")
     })
     @PostMapping("/carga/")
-    public String cargarDatos(
+    public ResponseEntity<?> cargarDatos(
             @Parameter(description = "Cargar todos los datos disponibles", example = "true")
             @RequestParam(name = "todos", defaultValue = "false") boolean todos,
 
@@ -56,9 +56,9 @@ public class CargaController {
             @RequestParam(name = "cyl", defaultValue = "false") boolean cyl
     ) {
         try {
-            return cargaService.cargarDatos(todos, cv, eus, cyl);
+            return new ResponseEntity<>(cargaService.cargarDatos(todos, cv, eus, cyl), HttpStatus.OK);
         } catch (Exception e) {
-            return "Error al cargar los datos";
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

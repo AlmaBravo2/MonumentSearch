@@ -1,4 +1,4 @@
-package com.wrapper.castillaYleon.Models;
+package com.wrapper.Euskadi.Models;
 
 public class MonumentoConvertidoEuskadi {
     private String nombre;
@@ -8,11 +8,10 @@ public class MonumentoConvertidoEuskadi {
     private String latitud;
     private String  longitud;
     private String descripcion;
-    private String provincia;
-    private String localidad;
+    private Localidad localidad;
 
 
-    public MonumentoConvertidoEuskadi(String nombre, String tipo, String direccion, String codigoPostal, String latitud, String longitud, String descripcion, String provincia, String localidad) {
+    public MonumentoConvertidoEuskadi(String nombre, String tipo, String direccion, String codigoPostal, String latitud, String longitud, String descripcion,Localidad localidad) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.direccion = direccion;
@@ -20,7 +19,6 @@ public class MonumentoConvertidoEuskadi {
         this.latitud = latitud;
         this.longitud = longitud;
         this.descripcion = descripcion;
-        this.provincia = provincia;
         this.localidad = localidad;
     }
 
@@ -80,19 +78,11 @@ public class MonumentoConvertidoEuskadi {
         this.descripcion = descripcion;
     }
 
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
-
-    public String getLocalidad() {
+    public Localidad getLocalidad() {
         return localidad;
     }
 
-    public void setLocalidad(String localidad) {
+    public void setLocalidad(Localidad localidad) {
         this.localidad = localidad;
     }
 }

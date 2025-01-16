@@ -1,20 +1,21 @@
-package com.wrapper.castillaYleon;
+package com.wrapper.Euskadi;
 
 
+import com.wrapper.Euskadi.Models.*;
 
-import com.wrapper.castillaYleon.Models.MonumentoConvertidoEuskadi;
-import com.wrapper.castillaYleon.Models.MonumentoOrginalEuskadi;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 public class ConversorEuskadi {
+
+    private  int contadorDeCorrectos = 0;
+    private static List<MonumentoOrginalEuskadi> monumentos = JsonMonumento.readJson("src/main/java/com/wrapper/Euskadi/DataSource/edificios.json");
     
-    private static List<MonumentoOrginalEuskadi> monumentos = JsonMonumento.readJson("src/main/java/org/example/Data/edificiosEntrega.json");
-    
-    public static List<MonumentoConvertidoEuskadi> convertirEuskadi() {
+    public static List<Object> convertirEuskadi() {
+        String informe = "<-------------------EUSKADI---------------------->\nSucesos al extraer de la fuente de datos:\n";
+         HashMap<String,String> rechazados = new HashMap<>();
+         HashMap<String,String> modificados = new HashMap<>();
+         int contadorDeInsertados = 0;
 
         List<MonumentoConvertidoEuskadi> monumentosConvertidos = new ArrayList<>();
         
@@ -24,17 +25,28 @@ public class ConversorEuskadi {
             String postalCode ;
             String tipo = getTipo(monumento);
 
-
+            if(Double.parseDouble(monumento.getLatwgs84()) < -90 || Double.parseDouble(monumento.getLatwgs84()) > 90 || Double.parseDouble(monumento.getLonwgs84()) < -180 || Double.parseDouble(monumento.getLonwgs84()) > 180){
+                rechazados.put(monumento.getDocumentName(),"Coordenadas incorrectas");
+                continue;
+            }
             if(Objects.equals(monumento.getPostalCode(), "") && monumento.getLatwgs84() != null && monumento.getLonwgs84() != null){
                 postalCode = org.example.Utils.MonumentoEuskadiLocator.getMonumentPostCode(monumento.getLonwgs84(), monumento.getLatwgs84());
+                modificados.put(monumento.getDocumentName(),"El código postal inexistente añadido");
             }
             else { postalCode = monumento.getPostalCode(); }
 
             if(monumento.getAddress() == null && monumento.getLatwgs84() != null && monumento.getLonwgs84() != null){
                 address = org.example.Utils.MonumentoEuskadiLocator.getMonumentDirection(monumento.getLonwgs84(), monumento.getLatwgs84());
+                modificados.put(monumento.getDocumentName(), "Dirección incorrecta.");
             }
             else { address = monumento.getAddress(); }
 
+            Localidad localidad = new Localidad();
+            localidad.setNombre(monumento.getMunicipality().toUpperCase());
+            Provincia provincia = new Provincia();
+            provincia.setCodigo(Integer.parseInt(postalCode));
+            provincia.setNombre(monumento.getTerritory().toUpperCase());
+            localidad.setProvincia(provincia);
             monumentosConvertidos.add(new MonumentoConvertidoEuskadi(
                     monumento.getDocumentName(),
                     tipo,
@@ -43,19 +55,21 @@ public class ConversorEuskadi {
                     monumento.getLatwgs84(),
                     monumento.getLonwgs84(),
                     monumento.getDocumentDescription(),
-                    monumento.getTerritory(),
-                    monumento.getMunicipality()
-            ));
+                    localidad
 
+            ));
+            contadorDeInsertados++;
 
         }
-
-        return monumentosConvertidos;
+        informe += "Monumentos correctos: " + contadorDeInsertados + "\n";
+        informe += "Monumentos rechazados: " + rechazados.size() + " -> Desglose: "+ rechazados.toString() + "\n";
+        informe += "Monumentos modificados: " + modificados.size() + " -> Desglose: "+ modificados.toString() + "\n";
+        return List.of(monumentosConvertidos,informe);
     }
 
     private static String getTipo(MonumentoOrginalEuskadi monumento) {
         String nombre = monumento.getDocumentName().toLowerCase();
-        String tipo = "Otro";
+        String tipo = "Otros";
 
         if(nombre.contains("iglesia") || nombre.contains("ermita") || nombre.contains("catedral") || nombre.contains("basílica")){
             tipo = "Iglesia-Ermita";
@@ -69,10 +83,5 @@ public class ConversorEuskadi {
             tipo = "Edificio singular";
         }
         return tipo;
-    }
-
-    public static void main(String[] args) {
-        List<MonumentoConvertidoEuskadi> monumentosConvertidos = convertirEuskadi();
-        JsonMonumento.writeJson(monumentosConvertidos, "src/main/java/org/example/Data/monumentosEuskadiConvertidos.json");
     }
 }

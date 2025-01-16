@@ -1,4 +1,4 @@
-package com.wrapper.castillaYleon.Models;
+package com.wrapper.Euskadi.Models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

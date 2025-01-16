@@ -1,4 +1,4 @@
-package com.wrapper.castillaYleon.Models;
+package com.wrapper.Euskadi.Models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,4 +29,5 @@ public class Localidad {
     public Provincia getProvincia(){return this.provincia;}
     public String getNombre(){return this.nombre;}
     public void setProvincia(Provincia provincia){this.provincia = provincia;}
+    public void setNombre(String nombre){this.nombre = nombre;}
 }

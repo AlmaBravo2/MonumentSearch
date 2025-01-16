@@ -1,4 +1,4 @@
-package com.wrapper.castillaYleon.Models;
+package com.wrapper.Euskadi.Models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,4 +17,12 @@ public class MonumentosDTO {
 
     public List<Monumento> getMonumentos(){return this.monumentos;}
     public String getInforme(){return this.informe;}
+    public void setMonumentos(List<Monumento> monumentos){this.monumentos = monumentos;}
+    public void setInforme(String informe){this.informe = informe;}
+    public String toString(){
+        return "MonumentosDTO{" +
+                "monumentos=" + monumentos +
+                ", informe='" + informe + '\'' +
+                '}';
+    }
 }

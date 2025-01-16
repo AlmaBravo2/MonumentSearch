@@ -1,4 +1,4 @@
-package com.wrapper.castillaYleon.Models;
+package com.wrapper.Euskadi.Models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,4 +25,10 @@ public class Provincia {
 
     public String getNombre(){return this.nombre;}
     public Integer getCodigo(){return this.codigo;}
+    public void setCodigo(Integer code){
+        this.codigo = code;
+    }
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
 }

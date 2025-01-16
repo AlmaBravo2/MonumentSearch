@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,11 @@ public class CargaController {
             @RequestParam(name = "cyl", defaultValue = "false") boolean cyl
     ) {
         try {
-            return new ResponseEntity<>(cargaService.cargarDatos(todos, cv, eus, cyl), HttpStatus.OK);
+            // Cargamos los datos, retornamos el informe con el header Allow
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Access-Control-Allow-Origin", "GET, POST, PUT, DELETE, OPTIONS");
+
+            return new ResponseEntity<>(cargaService.cargarDatos(todos, cv, eus, cyl), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

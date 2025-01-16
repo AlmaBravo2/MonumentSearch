@@ -10,10 +10,10 @@
 <h1 class="title">Carga del almacén de datos</h1>
 
 <div class="horizontal">
-    <p>Seleccione fuente:</p>
+    <p class=".p">Seleccione fuente:</p>
     <fieldset id="checkboxGroup">
         <label>
-        <input type="checkbox" name="fuente" value="Seleccionar todas" id="selectAll">
+        <input type="checkbox" name="fuente" value="Seleccionar todas" id="selectAll" class="p">
         Seleccione todas
         </label>
         </br>
@@ -38,14 +38,14 @@
 
 </div>
 <div class="horizontal">
-    <input type="button" value="Cancelar">
-    <input type="button" value="Cargar">
-    <input type="button" value="Borrar Almacén de datos">
+    <input type="button" value="Cancelar" class="buttonCancelar">
+    <input type="button" value="Cargar" class="buttonCargar">
+    <input type="button" value="Borrar Almacén de datos" class="buttonBorrar">
 </div>
 
 <p class="p">Resultados de carga:</p>
 <div class="text-output">
-    <p class="text-output-p"> Aquí va lo del informe</p>
+    <p class="text-output-p" id="informe fallos"> Aquí va lo del informe</p>
 </div>
 
 <script src="js/script.js"></script>

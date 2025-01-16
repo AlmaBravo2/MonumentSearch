@@ -27,7 +27,7 @@ body{
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 20px ;
     font-size: 18px;
     text-align: left;
 }
@@ -47,5 +47,23 @@ tr:nth-child(even) {
     height: 500px;
     width: 500px;
     margin-left: 50px;
+
+}
+
+.buttonCancelar{
+    padding: 7px;
+    height: 30px;
+    width: 100px;
+    border-radius: 8px;
+
+}
+
+.buttonBuscar{
+    padding: 7px;
+    height: 30px;
+    width: 100px;
+    background: darkgrey;
+    border-radius: 8px;
+    color: white;
 
 }

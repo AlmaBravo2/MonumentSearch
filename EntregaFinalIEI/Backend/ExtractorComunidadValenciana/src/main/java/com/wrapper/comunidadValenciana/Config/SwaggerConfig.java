@@ -15,7 +15,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API de Búsqueda")
+                        .title("Wrapper de Comunidad Valenciana")
                         .version("1.0.0")
                         .description("Documentación de el extractor de la Comunidad Valenciana(.csv)"));
     }

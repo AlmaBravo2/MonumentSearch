@@ -14,4 +14,7 @@ import java.util.List;
 public class MonumentosDTO {
     private List<Monumento> monumentos;
     private String informe;
+
+    public List<Monumento> getMonumentos(){return this.monumentos;}
+    public String getInforme(){return this.informe;}
 }

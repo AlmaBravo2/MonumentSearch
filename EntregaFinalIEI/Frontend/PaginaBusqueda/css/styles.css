@@ -44,7 +44,6 @@ tr:nth-child(even) {
 }
 
 #contenedor-del-mapa{
-    background-color: aquamarine;
     height: 500px;
     width: 500px;
     margin-left: 50px;

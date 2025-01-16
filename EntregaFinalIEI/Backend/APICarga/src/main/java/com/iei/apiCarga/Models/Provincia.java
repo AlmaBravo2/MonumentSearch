@@ -22,4 +22,7 @@ public class Provincia {
 
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
+
+    public String getNombre(){return this.nombre;}
+    public Integer getCodigo(){return this.codigo;}
 }

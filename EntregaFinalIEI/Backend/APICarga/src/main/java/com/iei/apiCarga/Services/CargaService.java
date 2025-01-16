@@ -19,17 +19,25 @@ public class CargaService {
     @Autowired
     private ValenciaWrapperClient valenciaWrapperClient;
 
+    @Autowired
+    private GuardarDatosService guardarDatosService;
+
     public String cargarDatos(boolean todos, boolean cv, boolean eus, boolean cyl)
     {
         String informe = "";
+
+
         if(todos)
         {
             MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
             informe += valencia.getInforme();
+            guardarDatosService.guardarDatos(valencia.getMonumentos());
             MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
             informe += euskadi.getInforme();
+            guardarDatosService.guardarDatos(euskadi.getMonumentos());
             MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
             informe += castillaYLeon.getInforme();
+            guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
 
         }
         else
@@ -37,17 +45,21 @@ public class CargaService {
             if(cv)
             {
                 MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
+                System.out.println(valencia.getMonumentos());
                 informe = valencia.getInforme();
+                guardarDatosService.guardarDatos(valencia.getMonumentos());
             }
             if(eus)
             {
                 MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
                 informe = euskadi.getInforme();
+                guardarDatosService.guardarDatos(euskadi.getMonumentos());
             }
             if(cyl)
             {
                 MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
                 informe = castillaYLeon.getInforme();
+                guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
             }
         }
         return informe;

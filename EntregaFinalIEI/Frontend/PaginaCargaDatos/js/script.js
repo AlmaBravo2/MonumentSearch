@@ -6,7 +6,7 @@ const regionValencia = document.getElementById("comunitatValenciana");
 const regionEuskadi = document.getElementById("euskadi");
 
 reporte = "";
-const apiBusqueda = "http://172.23.186.185:810/carga/"
+const apiBusqueda = "http://172.23.186.185:810/carga/";
 
 async function cargar(){
     try {

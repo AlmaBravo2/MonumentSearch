@@ -17,7 +17,7 @@ public class ValenciaController {
 
     @Operation(
             summary = "Cargar datos de la Comunidad Valenciana",
-            description = "Este endpoint permite cargar todos los datos relacionados con la Comunidad Valenciana en la base de datos."
+            description = "Este endpoint permite cargarlos datos de la Comunidad Valenciana de la fuente externa en csv."
     )
     @GetMapping("/carga")
     public ResponseEntity<?> carga() {

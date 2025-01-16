@@ -13,18 +13,19 @@ import java.util.stream.Collectors;
 import com.wrapper.comunidadValenciana.Models.*;
 import com.wrapper.comunidadValenciana.Utils.LevenshteinComparator;
 import com.wrapper.comunidadValenciana.Utils.MonumentLocator;
+import org.checkerframework.checker.units.qual.C;
 
 import static com.wrapper.comunidadValenciana.Logic.ConvertidorCoordenadas.convertirCoordenadas;
 
 public class Convertidor {
 
-    private static String informe = "<-------------------VALENCIA---------------------->\n";
-    private static HashMap<String,String> rechazados = new HashMap<>();
-    private static HashMap<String,String> modificados = new HashMap<>();
-    private static int contadorDeCorrectos = 0;
+    private  String informe = "<-------------------VALENCIA---------------------->\nSucesos al extraer de la fuente de datos:\n";
+    private  HashMap<String,String> rechazados = new HashMap<>();
+    private  HashMap<String,String> modificados = new HashMap<>();
+    private  int contadorDeCorrectos = 0;
 
     // Crear el objeto MONUMENTO que se enviará a través de la API
-    private static Monumento convertirMonumento(MonumentoConvertido monumento) {
+    private Monumento convertirMonumento(MonumentoConvertido monumento) {
 
         String nombre = monumento.getDenominacion();
         String tipo = getTipo(monumento);
@@ -70,7 +71,7 @@ public class Convertidor {
     private static String getTipo(MonumentoConvertido monumento) {
         String nombre = monumento.getDenominacion();
         nombre = nombre.toLowerCase();
-        String tipo = "Otro";
+        String tipo = "Otros";
         if(nombre.contains("iglesia") || nombre.contains("ermita") || nombre.contains("catedral") || nombre.contains("basílica") || nombre.contains("cartuja"))
         {    tipo = "Iglesia-Ermita";}
         else if (nombre.contains("yacimiento") || nombre.contains("cueva") || nombre.contains("dolmen") || nombre.contains("arqueológico") || nombre.contains("poblado"))
@@ -83,7 +84,7 @@ public class Convertidor {
     }
 
     // MÉTODO QUE A PARTIR DE LOS MONUMENTOS CON LAS COORDENADAS CORREGIDAS, CREA UNA LISTA DE MONUMENTOS DEFINITIVOS.
-    public static MonumentosDTO getMonumentos(String filePath) {
+    public MonumentosDTO getMonumentos(String filePath) {
         List<MonumentoConvertido> monumentosConvertidos = convertirCoordenadas(filePath);
         List<Monumento> monumentos = new ArrayList<>();
         int total = monumentosConvertidos.size();
@@ -123,7 +124,8 @@ public class Convertidor {
     }
 
     public static String convertidor(String filePath) {
-        MonumentosDTO monumentos = getMonumentos(filePath);
+        Convertidor convertidor = new Convertidor();
+        MonumentosDTO monumentos = convertidor.getMonumentos(filePath);
         return monumentosToJSON(monumentos);
     }
 

@@ -1,13 +1,9 @@
-package org.example;
+package com.wrapper.castillaYleon;
 
-import org.example.Models.MonumentoConvertidoEuskadi;
-import org.example.Models.MonumentoOrginalEuskadi;
-import org.example.Utils.MonumentoEuskadiLocator;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+
+
+import com.wrapper.castillaYleon.Models.MonumentoConvertidoEuskadi;
+import com.wrapper.castillaYleon.Models.MonumentoOrginalEuskadi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +26,12 @@ public class ConversorEuskadi {
 
 
             if(Objects.equals(monumento.getPostalCode(), "") && monumento.getLatwgs84() != null && monumento.getLonwgs84() != null){
-                postalCode = MonumentoEuskadiLocator.getMonumentPostCode(monumento.getLonwgs84(), monumento.getLatwgs84());
+                postalCode = org.example.Utils.MonumentoEuskadiLocator.getMonumentPostCode(monumento.getLonwgs84(), monumento.getLatwgs84());
             }
             else { postalCode = monumento.getPostalCode(); }
 
             if(monumento.getAddress() == null && monumento.getLatwgs84() != null && monumento.getLonwgs84() != null){
-                address = MonumentoEuskadiLocator.getMonumentDirection(monumento.getLonwgs84(), monumento.getLatwgs84());
+                address = org.example.Utils.MonumentoEuskadiLocator.getMonumentDirection(monumento.getLonwgs84(), monumento.getLatwgs84());
             }
             else { address = monumento.getAddress(); }
 

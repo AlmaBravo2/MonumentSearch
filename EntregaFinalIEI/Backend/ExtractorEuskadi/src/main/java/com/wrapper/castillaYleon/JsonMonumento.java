@@ -1,4 +1,4 @@
-package org.example;
+package com.wrapper.castillaYleon;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;

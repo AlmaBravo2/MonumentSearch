@@ -12,6 +12,7 @@ import java.util.List;
 public class ValenciaService {
 
     public MonumentosDTO cargarDatos(){
-        return Convertidor.getMonumentos("src/main/java/com/wrapper/comunidadValenciana/DataSource/bienes_inmuebles_interes_cultural.csv");
+        Convertidor convertidor = new Convertidor();
+        return convertidor.getMonumentos("src/main/java/com/wrapper/comunidadValenciana/DataSource/bienes_inmuebles_interes_cultural.csv");
     }
 }

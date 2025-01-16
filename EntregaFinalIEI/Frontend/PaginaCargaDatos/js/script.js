@@ -5,8 +5,8 @@ const regionCastilla = document.getElementById("castillaYLeon");
 const regionValencia = document.getElementById("comunitatValenciana");
 const regionEuskadi = document.getElementById("euskadi");
 
-const reporte = "";
-const apiBusqueda = "http://172.23.186.185:2202/carga/"
+reporte = "";
+const apiBusqueda = "http://172.23.186.185:810/carga/"
 
 async function cargar(){
     try {
@@ -20,8 +20,9 @@ async function cargar(){
             if(regionEuskadi.checked == true){params.eus = true}else{params.eus = false}
         }
         // Realizar la solicitud POST
-        const response = await axios.post(apiBusqueda, params).then(response => {document.getElementById("informe fallos").textContent = reporte;})
+        const response = await axios.post(apiBusqueda, params)
         reporte = response;
+        document.getElementById("informe fallos").textContent = reporte;
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);

@@ -24,6 +24,7 @@ public class CargaController {
     @Autowired
     private CargaService cargaService;
 
+
     /**
      * Endpoint para cargar datos en la base de datos.
      * Este endpoint permite cargar datos de monumentos en la base de datos de forma selectiva o completa.
@@ -34,6 +35,7 @@ public class CargaController {
      * @param cyl Indica si se deben cargar datos específicos de Castilla y León.
      * @return Mensaje indicando el estado de la operación de carga.
      */
+    @CrossOrigin
     @Operation(
             summary = "Cargar datos en la base de datos",
             description = "Permite cargar datos de monumentos en la base de datos de forma selectiva o completa."

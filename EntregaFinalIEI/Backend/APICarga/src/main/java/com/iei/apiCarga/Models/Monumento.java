@@ -1,124 +1,67 @@
 package com.iei.apiCarga.Models;
 
+import com.iei.apiCarga.Models.Localidad;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Check;
 
-import java.util.Objects;
-
+@Entity
+@Table(name = "monumento")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Check(constraints = "tipo IN ('Yacimiento arqueológico','Iglesia-Ermita','Monasterio-Convento','Castillo-Fortaleza-Torre','Edificio singular','Puente','Otros')")
 public class Monumento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
-    private String tipo;
+
+    @Column(name = "direccion", length = 1000, nullable = false)
     private String direccion;
-    private String codigo_postal;
+
+    @Column(name = "codigo_postal", length = 5, nullable = false)
+    private String codigoPostal;
+
+    @Column(name = "longitud", nullable = false)
     private String longitud;
+
+    @Column(name = "latitud", nullable = false)
     private String latitud;
+
+    @Column(name = "descripcion", length = 1000, nullable = false)
     private String descripcion;
+
+    @Column(name = "tipo", nullable = false, length = 50)
+    private String tipo;
+
+    @ManyToOne
+    @JoinColumn(name = "localidad_id", nullable = false)
     private Localidad localidad;
 
-    public Monumento(String nombre, String tipo, String direccion, String codigo_postal, String longitud, String latitud, String descripcion, Localidad localidad) {
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.direccion = direccion;
-        this.codigo_postal = codigo_postal;
-        this.longitud = longitud;
-        this.latitud = latitud;
-        this.descripcion = descripcion;
-        this.localidad = localidad;
-
-    }
-
-    public Monumento(){}
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public String getCodigoPostal() {
-        return codigo_postal;
-    }
-
-    public String getLongitud() {
-        return longitud;
-    }
-
-    public String getLatitud() {
-        return latitud;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public Localidad getLocalidad() {
-        return localidad;
-    }
-
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public void setCodigoPostal(String codigo_postal) {
-        this.codigo_postal = codigo_postal;
-    }
-
-    public void setLongitud(String longitud) {
-        this.longitud = longitud;
-    }
-
-    public void setLatitud(String latitud) {
-        this.latitud = latitud;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setLocalidad(Localidad localidad) {
-        this.localidad = localidad;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Monumento monumento = (Monumento) o;
-        return Objects.equals(nombre, monumento.nombre);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nombre);
-    }
-
-
-    @Override
-    public String toString() {
-        return "Monumento{" +
-                "nombre='" + nombre + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", codigo_postal='" + codigo_postal + '\'' +
-                ", longitud='" + longitud + '\'' +
-                ", latitud='" + latitud + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", localidad=" + localidad +
-                '}';
-    }
-
+    public Localidad getLocalidad(){return this.localidad;}
+    public String getNombre(){return this.nombre;}
+    public String getCodigoPostal(){return this.codigoPostal;}
+    public String getDireccion(){return this.direccion;}
+    public String getLongitud(){return this.longitud;}
+    public String getLatitud(){return this.latitud;}
+    public String getDescripcion(){return this.descripcion;}
+    public String getTipo(){return this.tipo;}
+    public void setLocalidad(Localidad localidad){this.localidad = localidad;}
+public void setNombre(String nombre){this.nombre = nombre;}
+public void setCodigoPostal(String codigoPostal){this.codigoPostal = codigoPostal;}
+public void setDireccion(String direccion){this.direccion = direccion;}
+public void setLongitud(String longitud){this.longitud = longitud;}
+public void setLatitud(String latitud){this.latitud = latitud;}
+public void setDescripcion(String descripcion){this.descripcion = descripcion;}
+public void setTipo(String tipo){this.tipo = tipo;}
 
 }

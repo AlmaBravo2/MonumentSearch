@@ -25,4 +25,8 @@ public class Localidad {
     @ManyToOne
     @JoinColumn(name = "provincia_codigo", nullable = false)
     private Provincia provincia;
+
+    public Provincia getProvincia(){return this.provincia;}
+    public String getNombre(){return this.nombre;}
+    public void setProvincia(Provincia provincia){this.provincia = provincia;}
 }

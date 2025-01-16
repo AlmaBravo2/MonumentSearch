@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * así como para vaciar la base de datos.
  */
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @Tag(name = "Cargar", description = "Endpoints para cargar los monumentos de los wrappers en la base de datos")
 public class CargaController {
 

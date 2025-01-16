@@ -47,3 +47,30 @@ body{
     font-size: 20px;
     color: #333;
 }
+
+.buttonCancelar{
+    padding: 7px;
+    height: 30px;
+    width: 100px;
+    border-radius: 8px;
+
+}
+
+.buttonCargar{
+    padding: 7px;
+    height: 30px;
+    width: 100px;
+    background: darkgrey;
+    border-radius: 8px;
+    color: white;
+
+}
+
+.buttonBorrar{
+    padding: 7px;
+    height: 30px;
+    width: 200px;
+    border-radius: 8px;
+    background: crimson;
+    color: white;
+}

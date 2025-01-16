@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga del almacén de datos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+<h1 class="title">Carga del almacén de datos</h1>
+
+<div class="horizontal">
+    <p class=".p">Seleccione fuente:</p>
+    <fieldset id="checkboxGroup">
+        <label>
+        <input type="checkbox" name="fuente" value="Seleccionar todas" id="selectAll" class="p">
+        Seleccione todas
+        </label>
+        </br>
+        <label>
+            <input type="checkbox" name="fuente" value="Castilla y León" id="castillaYLeon" class="region">
+            Castilla y León
+        </label>
+        </br>
+        <label>
+            <input type="checkbox" name="fuente" value="Comunitat Valenciana" id="comunitatValenciana" class="region">
+            Comunitat Valenciana
+        </label>
+        </br>
+        <label>
+            <input type="checkbox" name="fuente" value="Euskadi" id="euskadi" class="region">
+            Euskadi
+        </label>
+
+
+
+    </fieldset>
+
+</div>
+<div class="horizontal">
+    <input type="button" value="Cancelar" class="buttonCancelar">
+    <input type="button" value="Cargar" class="buttonCargar" id="buttonCargar">
+    <input type="button" value="Borrar Almacén de datos" class="buttonBorrar">
+</div>
+
+<p class="p">Resultados de carga:</p>
+<div class="text-output">
+    <p class="text-output-p" id="informe fallos"> Aquí va lo del informe</p>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

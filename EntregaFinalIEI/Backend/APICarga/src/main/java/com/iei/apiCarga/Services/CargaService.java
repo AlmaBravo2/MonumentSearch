@@ -1,27 +1,73 @@
 package com.iei.apiCarga.Services;
 
+import com.iei.apiCarga.Clients.CastillaYLeonWrapperClient;
+import com.iei.apiCarga.Clients.EuskadiWrapperClient;
+import com.iei.apiCarga.Clients.ValenciaWrapperClient;
+import com.iei.apiCarga.Models.MonumentosDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class CargaService {
 
-    public void cargarDatos(boolean todos, boolean cv, boolean eus, boolean cyl)
+    @Autowired
+    private CastillaYLeonWrapperClient castillaYLeonWrapperClient;
+
+    @Autowired
+    private EuskadiWrapperClient euskadiWrapperClient;
+
+    @Autowired
+    private ValenciaWrapperClient valenciaWrapperClient;
+
+    @Autowired
+    private GuardarDatosService guardarDatosService;
+
+    public String cargarDatos(boolean todos, boolean cv, boolean eus, boolean cyl)
     {
+        String informe = "";
+
+
         if(todos)
         {
-            //Cargar todos los datos
+            MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
+            informe += valencia.getInforme();
+            informe += guardarDatosService.guardarDatos(valencia.getMonumentos());
+            MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
+            informe += euskadi.getInforme();
+            informe += guardarDatosService.guardarDatos(euskadi.getMonumentos());
+            MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
+            informe += castillaYLeon.getInforme();
+            informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
+
         }
         else
         {
             if(cv)
             {
-                //Cargar datos de la Comunidad Valenciana
+                MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
+                System.out.println(valencia.getMonumentos());
+                informe = valencia.getInforme();
+                informe += guardarDatosService.guardarDatos(valencia.getMonumentos());
             }
             if(eus)
             {
-                //Cargar datos de Euskadi
+                MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
+                informe = euskadi.getInforme();
+                informe += guardarDatosService.guardarDatos(euskadi.getMonumentos());
             }
             if(cyl)
             {
-                //Cargar datos de Castilla y León
+                MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
+                informe = castillaYLeon.getInforme();
+                informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
             }
         }
+        return informe;
     }
+
+    public void vaciarDatos() {
+        guardarDatosService.deleteAll();
+    }
+
+
 }

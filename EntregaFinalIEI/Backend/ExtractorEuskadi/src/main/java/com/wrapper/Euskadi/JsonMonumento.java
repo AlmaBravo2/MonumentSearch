@@ -1,25 +1,15 @@
-package org.example;
+package com.wrapper.Euskadi;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.*;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
-import org.example.Models.MonumentoConvertidoEuskadi;
-import org.example.Models.MonumentoOrginalEuskadi;
+import com.wrapper.Euskadi.Models.MonumentoConvertidoEuskadi;
+import com.wrapper.Euskadi.Models.MonumentoOrginalEuskadi;
 
 public class JsonMonumento {
 

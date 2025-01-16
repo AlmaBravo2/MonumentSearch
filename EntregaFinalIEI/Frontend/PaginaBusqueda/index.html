@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de monumentos de interés cultural</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+</head>
+<body>
+<h1 class="title">Buscador de monumentos de interés cultural</h1>
+<div class="horizontal">
+    <div class="vertical">
+        <div class="horizontal">
+            <p class="regular-text">Localidad:</p>
+            <input type="text" id="localidad">
+        </div>
+        <div class="horizontal">
+            <p class="regular-text" >Cód Postal:</p>
+            <input type="text" id="codigo_postal">
+        </div>
+        <div class="horizontal">
+            <p class="regular-text" >Provincia:</p>
+            <input type="text" id="provincia">
+        </div>
+        <div class="horizontal">
+            <p class="regular-text">Tipo:</p>
+            <select id="tipo" name="tipo">
+                <option value="Todos" selected>Todos</option>
+                <option value="Yacimiento arqueológico">Yacimiento Arqueológico</option>
+                <option value="Iglesia-Ermita">Iglesia-Ermita</option>
+                <option value="Monasterio-Convento">Monasterio-Convento</option>
+                <option value="Castillo-Fortaleza-Torre">Castillo-Fortaleza-Torre</option>
+                <option value="Edificio singular">Edificio singular</option>
+                <option value="Puente">Puente</option>
+                <option value="Otros">Otros</option>
+            </select>
+
+        </div>
+    </div>
+
+    <div id="contenedor-del-mapa"></div>
+
+
+</div>
+
+<div class="horizontal">
+    <input type="button" id="cancel" value="Cancelar" class="buttonCancelar">
+    <input type="button" id="search" value="Buscar" class="buttonBuscar">
+</div>
+
+<p class="regular-text">Resultados de búsqueda</p>
+<table id="table">
+    <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Dirección</th>
+        <th>Localidad</th>
+        <th>Cód. postal</th>
+        <th>Provincia</th>
+        <th>Descripción</th>
+        <th>Logitud</th>
+        <th>Latitud</th>
+    </tr>
+</table>
+
+
+
+<script src = script/script.js></script>
+<script src = script/Monumento.js></script>
+
+</body>
+</html>

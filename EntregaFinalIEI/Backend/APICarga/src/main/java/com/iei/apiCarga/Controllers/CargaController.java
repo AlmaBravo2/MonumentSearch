@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-@Tag(name = "Cargar", description = "Endpoints para cargar los monumentos en la base de datos")
+@Tag(name = "Cargar", description = "Endpoints para cargar los monumentos de los wrappers en la base de datos")
 public class CargaController {
 
     @Autowired

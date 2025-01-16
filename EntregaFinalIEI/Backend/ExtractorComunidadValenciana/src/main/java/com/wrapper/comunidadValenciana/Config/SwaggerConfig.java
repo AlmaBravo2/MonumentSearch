@@ -1,4 +1,4 @@
-package com.iei.apiCarga.config;
+package com.wrapper.comunidadValenciana.Config;
 
 
 import io.swagger.v3.oas.models.OpenAPI;
@@ -17,6 +17,6 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("API de Búsqueda")
                         .version("1.0.0")
-                        .description("Documentación de la API para la carga de datos en la base de datos."));
+                        .description("Documentación de el extractor de la Comunidad Valenciana(.csv)"));
     }
 }

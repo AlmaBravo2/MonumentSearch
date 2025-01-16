@@ -3,8 +3,11 @@ package com.iei.apiCarga.Controllers;
 import com.iei.apiCarga.Services.CargaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -34,6 +37,10 @@ public class CargaController {
             summary = "Cargar datos en la base de datos",
             description = "Permite cargar datos de monumentos en la base de datos de forma selectiva o completa."
     )
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Datos cargados correctamente"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error al cargar los datos")
+    })
     @PostMapping("/carga/")
     public String cargarDatos(
             @Parameter(description = "Cargar todos los datos disponibles", example = "true")
@@ -48,8 +55,13 @@ public class CargaController {
             @Parameter(description = "Cargar datos de Castilla y León", example = "true")
             @RequestParam(name = "cyl", defaultValue = "false") boolean cyl
     ) {
-        return cargaService.cargarDatos(todos, cv, eus, cyl);
+        try {
+            return cargaService.cargarDatos(todos, cv, eus, cyl);
+        } catch (Exception e) {
+            return "Error al cargar los datos";
+        }
     }
+
 
     /**
      * Endpoint para eliminar todos los datos de la base de datos.
@@ -59,8 +71,18 @@ public class CargaController {
             summary = "Eliminar todos los datos de la base de datos",
             description = "Permite eliminar todos los datos de la base de datos."
     )
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Datos eliminados correctamente"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error al eliminar los datos")
+    })
+
     @DeleteMapping("/vaciar")
-    public void vaciarDatos() {
-        cargaService.vaciarDatos();
+    public ResponseEntity<?> vaciarDatos() {
+        try{
+            cargaService.vaciarDatos();
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -23,7 +23,8 @@ public class GuardarDatosService {
     @Autowired
     private MonumentoRepository monumentoRepository;
 
-    public void guardarDatos(List<Monumento> monumentos) {
+    public String guardarDatos(List<Monumento> monumentos) {
+        String informe = "Sucesos al insertar en base de datos: ";
         for(Monumento monumento : monumentos) {
             Provincia provincia = monumento.getLocalidad().getProvincia();
             System.out.println("Provincia: " + provincia.getNombre() + "CÓDIGO:" + provincia.getCodigo() + " Localidad: " + monumento.getLocalidad().getNombre() + " Monumento: " + monumento.getNombre());
@@ -43,9 +44,11 @@ public class GuardarDatosService {
             monumento.setLocalidad(localidadGuardada);
             if(!monumentoRepository.existsByNombre(monumento.getNombre())) {
                 monumentoRepository.save(monumento);
+            }else{
+                informe += "\nMonumento no almacenado por duplicidad: " + monumento.getNombre();
             }
 
         }
-
+        return informe;
     }
 }

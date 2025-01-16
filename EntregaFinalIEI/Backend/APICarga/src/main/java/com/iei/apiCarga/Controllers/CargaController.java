@@ -87,7 +87,6 @@ public class CargaController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Datos eliminados correctamente"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error al eliminar los datos")
     })
-
     @DeleteMapping("/vaciar")
     public ResponseEntity<?> vaciarDatos() {
         try{

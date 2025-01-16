@@ -62,6 +62,11 @@ public class CargaController {
             // Cargamos los datos, retornamos el informe con el header Allow
             HttpHeaders headers = new HttpHeaders();
             headers.add("Access-Control-Allow-Origin", "GET, POST, PUT, DELETE, OPTIONS");
+            headers.add("Access-Control-Allow-Headers", "*");
+            headers.add("Access-Control-Allow-Credentials", "true");
+            headers.add("Access-Control-Allow-Methods", "*");
+            headers.add("Access-Control-Expose-Headers", "*");
+            headers.add("Access-Control-Max-Age", "3600");
 
             return new ResponseEntity<>(cargaService.cargarDatos(todos, cv, eus, cyl), headers, HttpStatus.OK);
         } catch (Exception e) {

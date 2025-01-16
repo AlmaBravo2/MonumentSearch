@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/monumentos")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class MonumentController {
     @Autowired
     private BusquedaService busquedaService;

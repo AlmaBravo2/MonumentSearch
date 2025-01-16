@@ -1,5 +1,9 @@
 package com.iei.apiBusqueda.Models;
-
+/**
+ * En esta clase se define la entidad Provincia, tal como fue especificada en el esquema global para la primera entrega del proyecto de prácticas.
+ * @author M12.01
+ * @version 1.0
+ * */
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

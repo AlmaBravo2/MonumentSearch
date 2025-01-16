@@ -1,18 +1,21 @@
 package com.iei.apiBusqueda.Models;
-
+/**
+ * En esta clase se define la entidad Monumento, tal como fue especificada en el esquema global para la primera entrega del proyecto de prácticas.
+ * @author M12.01
+ * @version 1.0
+ * */
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Check;
-
 @Entity
 @Table(name = "monumento")
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Check(constraints = "tipo IN ('Yacimiento arqueológico','Iglesia-Ermita','Monasterio-Convento','Castillo-Fortaleza-Torre','Edificio singular','Puente','Otros')")
 public class Monumento {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

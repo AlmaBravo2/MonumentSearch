@@ -64,4 +64,10 @@ public class CargaService {
         }
         return informe;
     }
+
+    public void vaciarDatos() {
+        guardarDatosService.deleteAll();
+    }
+
+
 }

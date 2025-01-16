@@ -5,10 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -37,5 +34,14 @@ public class CargaController {
             @RequestParam(name = "cyl", defaultValue = "false") boolean cyl
     ) {
         return cargaService.cargarDatos(todos, cv, eus, cyl);
+    }
+
+    @Operation(
+            summary = "Eliminar todos los datos de la base de datos",
+            description = "Permite eliminar todos los datos de la base de datos."
+    )
+    @DeleteMapping("/vaciar")
+    public void vaciarDatos() {
+        cargaService.vaciarDatos();
     }
 }

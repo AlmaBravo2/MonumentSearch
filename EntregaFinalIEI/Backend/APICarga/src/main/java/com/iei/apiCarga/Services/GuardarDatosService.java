@@ -51,4 +51,10 @@ public class GuardarDatosService {
         }
         return informe;
     }
+
+    public void deleteAll(){
+        monumentoRepository.deleteAll();
+        localidadRepository.deleteAll();
+        provinciaRepository.deleteAll();
+    }
 }

@@ -1,19 +1,33 @@
 const buttonCargar = document.getElementById("buttonCargar");
 const selectAllCheckbox = document.getElementById("selectAll");
 const regionCheckboxes = document.querySelectorAll(".region");
-const datos = {
-    euskadi: true
-}
+const regionCastilla = document.getElementById("castillaYLeon");
+const regionValencia = document.getElementById("comunitatValenciana");
+const regionEuskadi = document.getElementById("euskadi");
 
-async function cargarEuskadi(){
+const reporte = "";
+const apiBusqueda = "http://172.23.186.185:2202/carga/"
+
+async function cargar(){
     try {
+        const params ={} ;
+        if(selectAllCheckbox.checked == true){
+        params.todos = true;
+        }else{
+            params.todos = false;
+            if(regionCastilla.checked == true){params.cyl = true}else{params.cyl = false}
+            if(regionValencia.checked == true){params.cv = true}else{params.cv = false}
+            if(regionEuskadi.checked == true){params.eus = true}else{params.eus = false}
+        }
         // Realizar la solicitud POST
-        const response = await axios.post("http://172.23.186.185:2202/carga", datos);
+        const response = await axios.post(apiBusqueda, params).then(response => {document.getElementById("informe fallos").textContent = reporte;})
+        reporte = response;
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);
     }
 }
+
 
 selectAllCheckbox.addEventListener("change", function() {
    if(selectAllCheckbox.checked){
@@ -39,4 +53,5 @@ regionCheckboxes.forEach(checkbox => {
     });
 });
 
-buttonCargar.addEventListener("click", cargarEuskadi);
+buttonCargar.addEventListener("click", cargar);
+

@@ -23,13 +23,13 @@ public class MonumentController {
     )
     @GetMapping("/")
     public List<MonumentoDTO> getMonumentos(
-            @Parameter(description = "Nombre de la localidad", example = "Valencia")
+            @Parameter(description = "Nombre de la localidad", example = "VALENCIA")
             @RequestParam(name = "localidad", defaultValue = "null") String localidad,
 
             @Parameter(description = "Código postal de la localidad", example = "46760")
             @RequestParam(name = "codigoPostal", defaultValue = "null") String codPostal,
 
-            @Parameter(description = "Nombre de la provincia", example = "Valencia")
+            @Parameter(description = "Nombre de la provincia", example = "VALENCIA")
             @RequestParam(name = "provincia", defaultValue = "null") String provincia,
 
             @Parameter(description = "Tipo de monumento", example = "Histórico")

@@ -12,11 +12,13 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
     var localidadElement = document.getElementById("localidad")
     var codigo_postalElement = document.getElementById("codigo_postal")
     var provinciaElement = document.getElementById("provincia")
-    //var tipoElement = document.getElementById("tipo")
+    var tipoElement = document.getElementById("tipo")
 
 //Identificamos el botón de búsqueda y la cancelar
     const buttonSearch = document.getElementById("search")
     const buttonCancel = document.getElementById("cancel")
+
+
 
 //Realizamos la búsqueda a la API
     async function buscarMonumentos() {
@@ -42,9 +44,9 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
             console.log("Entra")
             params.provincia = provincia.toUpperCase();
         }
-       /* if(tipoElement.value || tipoElement.value!=="Todos"){
+       if(tipoElement.value || tipoElement.value!=="Todos"){
             params.tipo = tipoElement.value;
-        }*/
+        }
 
 
         //Realizamos la petición a la API
@@ -52,17 +54,11 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
             params: params
         })
             .then(response => {
-                monumentos = []
                 console.log(response.data);
-                monumentos = response.data.map(item => {
+                var monumentosBuscar = response.data.map(item => {
                     const m = item.monumento; // Acceder al objeto "monumento"
 
-                    if (m.latitud && m.longitud) {
-                        const marker = L.marker([m.latitud, m.longitud]).addTo(mapa);
-                        marker.bindPopup(m.nombre);
-                    } else {
-                        console.warn("Latitud o longitud no disponibles para el monumento:", m);
-                    }
+
 
                     return new Monumento(
                         m.id,
@@ -77,6 +73,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
                         m.localidad.provincia.nombre // Acceder al nombre de la provincia
                     );
                 });
+                cargarDatos(monumentosBuscar)
             })
             .catch(error => {
                 console.error("Error en la solicitud:", error);
@@ -100,11 +97,26 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
     circulo.bindPopup("Programación en SIG")
 
     const tabla = document.getElementById("table")
+    var markers = []
+    var monumentosTableBody = document.getElementById("table").getElementsByTagName("tbody")[0];
 
 
-    function cargarDatos(){
-        for (const monumento of monumentos) {
+    function cargarDatos(monumentosCargar) {
+
+        //Borramos los markers del mapa
+        for (const marker of markers) {
+            marker.remove()
+        }
+        //Borramos los datos de la tabla
+        for(let i = monumentosTableBody.rows.length - 1; i > 0; i--)
+        {
+            monumentosTableBody.deleteRow(i);
+        }
+
+
+        for (const monumento of monumentosCargar) {
             var marcador = L.marker([monumento.longitud, monumento.latitud]).addTo(mapa)
+            markers.push(marcador)
             marcador.bindPopup(monumento.nombre + "/n/n" +
                 monumento.direccion + "/n/n" +
                 "Tipo: " + monumento.tipo + "/n/n" +
@@ -144,22 +156,18 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
         }
     }
 
+
     async function cargarDatosPorDefecto(){
 
         axios.get("http://172.23.186.185:2930/monumentos/")
             .then( response => {
-                monumentos= []
+
                 console.log(response.data);
-                monumentos = response.data.map(item => {
+                monumentosDefecto = response.data.map(item => {
                     const m = item.monumento; // Acceder al objeto "monumento"
 
 
-                        if (m.latitud && m.longitud) {
-                            const marker = L.marker([m.latitud, m.longitud]).addTo(mapa);
-                            marker.bindPopup(m.nombre);
-                        } else {
-                            console.warn("Latitud o longitud no disponibles para el monumento:", m);
-                        }
+
 
 
                     return new Monumento(
@@ -176,9 +184,8 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
                     );
                 });
 
-                cargarDatos();
+                cargarDatos(monumentosDefecto);
                 // Si deseas devolver la lista de monumentos, puedes hacerlo aquí
-                console.log(monumentos);
 
                          })
             .catch(error => {
@@ -194,12 +201,8 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
 
 
-    function clicSobreMapa(evento) {
-        alert("Diste clic en el punto con coordenadas latitud: " + evento.latlng.lat + " y longitud: " + evento.latlng.lng)
-    }
 
-    mapa.on("click", clicSobreMapa);
-
+    cargarDatosPorDefecto()
     console.log(mapa)
     console.log(marcador)
 //console.log(circulo)

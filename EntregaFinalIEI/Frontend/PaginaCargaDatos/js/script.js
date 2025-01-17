@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
 
-
-
+const buttonBorrar = document.getElementById("buttonBorrar");
     const buttonCargar = document.getElementById("buttonCargar");
 const selectAllCheckbox = document.getElementById("selectAll");
 const regionCheckboxes = document.querySelectorAll(".region");
@@ -12,26 +11,45 @@ const regionValencia = document.getElementById("comunitatValenciana");
 const regionEuskadi = document.getElementById("euskadi");
 
 reporte = "";
-const apiBusqueda = "http://localhost:810/carga/";
+const apiCarga = "http://localhost:810/carga/";
+const apiBorrar = "http://localhost:810/vaciar";
 
 async function cargar(){
     try {
-        const params ={} ;
+        var params ={} ;
         if(selectAllCheckbox.checked == true){
         params.todos = true;
         }else{
             params.todos = false;
-            if(regionCastilla.checked == true){params.cyl = true}else{params.cyl = false}
-            if(regionValencia.checked == true){params.cv = true}else{params.cv = false}
-            if(regionEuskadi.checked == true){params.eus = true}else{params.eus = false}
+            params.cyl = regionCastilla.checked;
+            params.cv = regionValencia.checked;
+            params.eus = regionEuskadi.checked;
         }
         // Realizar la solicitud POST
-        const response = await axios.post(apiBusqueda, params)
+        console.log(JSON.stringify(params, null, 2));
+        console.log(apiCarga);
+        const response = await axios.post(apiCarga, params,{
+            timeout: 120000000000
+        })
+
+        //Cambiamos el texto del informe de fallos
         document.getElementById("informe fallos").textContent = JSON.stringify(response.data, null, 2);
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);
     }
+}
+
+async function borrar() {
+    try {
+        const response = await axios.delete(apiBorrar);
+        document.getElementById("informe fallos").textContent = "Se ha borrado la base de datos correctamente.";
+        console.log(response.data);
+    }catch (error) {
+        document.getElementById("informe fallos").textContent = "Se ha producido un error en el borrado.";
+        console.error("Error en la solicitud de borrado.")
+    }
+
 }
 
 
@@ -59,5 +77,7 @@ regionCheckboxes.forEach(checkbox => {
     });
 });
 
-buttonCargar.addEventListener("click", cargar);});
+buttonCargar.addEventListener("click", cargar);
+buttonBorrar.addEventListener("click", borrar)
 
+});

@@ -90,8 +90,8 @@ public class ConvertidorCLE {
                         //SI LOS VALORES DE LATITUD Y LONGITUD NO SON NULOS NI ESTÁN VACÍOS,
                         //SE LIMPIA SU FORMATO POR SI ACASO HAY ALGUNA ERRATA Y SE ASIGNAN
                         if((getTagValue("latitud", coordenadas) != null && !getTagValue("latitud", coordenadas).isEmpty() ) && (getTagValue("longitud", coordenadas) != null && !getTagValue("longitud", coordenadas).isEmpty())){
-                            String latitud = getTagValue("latitud", coordenadas);
-                            String longitud = getTagValue("longitud", coordenadas);
+                            String latitud = getTagValue("longitud", coordenadas);
+                            String longitud = getTagValue("latitud", coordenadas);
 
                             latitud = validateAndCleanCoordinate(latitud);
                             longitud = validateAndCleanCoordinate(longitud);

@@ -30,11 +30,7 @@ public class CargaController {
      * Endpoint para cargar datos en la base de datos.
      * Este endpoint permite cargar datos de monumentos en la base de datos de forma selectiva o completa.
      *
-     * @param todos Indica si se deben cargar todos los datos disponibles.
-     * @param cv Indica si se deben cargar datos específicos de la Comunidad Valenciana.
-     * @param eus Indica si se deben cargar datos específicos del País Vasco (Euskadi).
-     * @param cyl Indica si se deben cargar datos específicos de Castilla y León.
-     * @return Mensaje indicando el estado de la operación de carga.
+        * @param params Parámetros de carga
      */
     @CrossOrigin
     @Operation(

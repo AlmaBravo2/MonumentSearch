@@ -35,8 +35,8 @@ public class EuskadiService {
         res.setTipo(monumento.getTipo());
         res.setDireccion(monumento.getDireccion());
         res.setCodigoPostal(monumento.getCodigo_postal());
-        res.setLatitud(monumento.getLatitud());
-        res.setLongitud(monumento.getLongitud());
+        res.setLatitud(monumento.getLongitud());
+        res.setLongitud(monumento.getLatitud());
         res.setDescripcion(monumento.getDescripcion());
         res.setLocalidad(monumento.getLocalidad());
         return res;

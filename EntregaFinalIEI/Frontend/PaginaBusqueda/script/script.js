@@ -109,6 +109,7 @@
 
 
         for (const monumento of monumentosCargar) {
+
             var marcador = L.marker([monumento.longitud, monumento.latitud]).addTo(mapa)
             markers.push(marcador)
             marcador.bindPopup(monumento.nombre + "/n/n" +
@@ -153,7 +154,7 @@
 
     async function cargarDatosPorDefecto() {
 
-        await axios.get("http://localhost:2930/monumentos/")
+        const res = await axios.get("http://localhost:2930/monumentos/")
             .then(response => {
 
                 console.log(response.data);
@@ -191,7 +192,7 @@
     console.log(mapa)
     console.log(marcador)
 
-    cargarDatosPorDefecto().then(r => console.log("Monumentos cargados por defecto"))
+    await cargarDatosPorDefecto()
 
 
 

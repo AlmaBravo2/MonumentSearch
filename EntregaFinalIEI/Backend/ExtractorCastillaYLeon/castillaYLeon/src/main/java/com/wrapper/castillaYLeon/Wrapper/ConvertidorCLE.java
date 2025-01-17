@@ -1,4 +1,4 @@
-package com.wrapper.castillaYLeon.Logic;
+package com.wrapper.castillaYLeon.Wrapper;
 
 import com.wrapper.castillaYLeon.Models.*;
 import com.wrapper.castillaYLeon.Utils.LevenshteinComparator;
@@ -12,22 +12,18 @@ import org.apache.commons.text.StringEscapeUtils;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.wrapper.castillaYLeon.Utils.CleanCoord.validateAndCleanCoordinate;
-import static com.wrapper.castillaYLeon.Utils.MonumentLocator.getCoordinates;
 
 
 public class ConvertidorCLE {
-    private String informe = "<-------------------CASTILLA Y LEÓN---------------------->\n";
-    private HashMap<String,String> rechazados = new HashMap<>();
-    private HashMap<String,String> modificados = new HashMap<>();
-    private int contadorDeCorrectos = 0;
+    public String informe = "<-------------------CASTILLA Y LEÓN---------------------->\n";
+    public HashMap<String,String> rechazados = new HashMap<>();
+    public HashMap<String,String> modificados = new HashMap<>();
+    public int contadorDeCorrectos = 0;
     public ConvertidorCLE() {
         // Inicialización si es necesario
     }
@@ -35,7 +31,6 @@ public class ConvertidorCLE {
     public Map<String, String> getModificados() {
         return modificados;
     }
-
     public Map<String, String> getRechazados() {
         return rechazados;
     }
@@ -340,47 +335,7 @@ public class ConvertidorCLE {
         return new HashMap<>();
     }
 
-    public MonumentosDTO getMonumentosCLE(String filepath){
-        ConvertidorCLE convertidorCLE = new ConvertidorCLE();
-        List<MonumentoCLE> monumentosObtenidos = convertidorCLE.readXML(filepath);
 
-        Map<String, String> modificados = convertidorCLE.getModificados();
-        Map<String, String> rechazados = convertidorCLE.getRechazados();
-
-        int numModificados = modificados.size();
-        int numRechazados = rechazados.size();
-
-        informe += "Monumentos correctos: " + contadorDeCorrectos + "\n";
-        informe += "Monumentos rechazados: " + numRechazados + " -> Desglose: " + rechazados + "\n";
-        informe += "Monumentos modificados: " + numModificados + " -> Desglose: " + modificados + "\n";
-
-        //Convertir MonumentoCLE a MonumentoDTO
-        List<MonumentoCLE> monumentos = monumentosObtenidos.stream().distinct().collect(Collectors.toList());
-
-        List<MonumentoDTO> monumentosDTO = new ArrayList<>();
-        for (MonumentoCLE monumento : monumentos) {
-            Localidad localidad = new Localidad();
-            Provincia provincia = new Provincia();
-            provincia.setNombre(monumento.getProvincia().toUpperCase());
-            provincia.setCodigo(Integer.parseInt(monumento.getCodigo_postal().substring(0, 2)));
-            localidad.setNombre(monumento.getLocalidad().toUpperCase());
-            localidad.setProvincia(provincia);
-            MonumentoDTO monumentoDTO = new MonumentoDTO();
-            monumentoDTO.setNombre(monumento.getNombre());
-            monumentoDTO.setTipo(monumento.getTipo());
-            monumentoDTO.setDireccion(monumento.getDireccion());
-            monumentoDTO.setCodigoPostal(monumento.getCodigo_postal());
-            monumentoDTO.setLongitud(monumento.getLongitud());
-            monumentoDTO.setLatitud(monumento.getLatitud());
-            String descripcion = monumento.getDescripcion();
-            descripcion = descripcion.substring(0, Math.min(descripcion.length(), 1000));
-            monumentoDTO.setDescripcion(descripcion);
-            monumentoDTO.setLocalidad(localidad);
-            monumentosDTO.add(monumentoDTO);
-        }
-
-        return new MonumentosDTO(monumentosDTO, informe);
-    }
 }
 
 

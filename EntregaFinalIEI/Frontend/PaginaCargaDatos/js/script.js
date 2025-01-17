@@ -13,20 +13,29 @@ const regionEuskadi = document.getElementById("euskadi");
 
 reporte = "";
 const apiBusqueda = "http://localhost:810/carga/";
+const hola = "http://localhost:2202/hola";
 
 async function cargar(){
     try {
-        const params ={} ;
+        var params ={} ;
         if(selectAllCheckbox.checked == true){
         params.todos = true;
         }else{
             params.todos = false;
-            if(regionCastilla.checked == true){params.cyl = true}else{params.cyl = false}
-            if(regionValencia.checked == true){params.cv = true}else{params.cv = false}
-            if(regionEuskadi.checked == true){params.eus = true}else{params.eus = false}
+            params.cyl = regionCastilla.checked;
+            params.cv = regionValencia.checked;
+            params.eus = regionEuskadi.checked;
         }
         // Realizar la solicitud POST
+        console.log(JSON.stringify(params, null, 2));
+        console.log(apiBusqueda);
         const response = await axios.post(apiBusqueda, params)
+
+        //Prueba
+        const response2 = await axios.get(hola)
+        console.log(response2.data);
+
+        //Cambiamos el texto del informe de fallos
         document.getElementById("informe fallos").textContent = JSON.stringify(response.data, null, 2);
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {

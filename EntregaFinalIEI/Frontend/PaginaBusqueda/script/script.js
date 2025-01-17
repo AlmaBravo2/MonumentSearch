@@ -51,7 +51,7 @@
 
 
         //Realizamos la petición a la API
-        await axios.get("http://172.23.186.185:2930/monumentos/", {
+        await axios.get("http://localhost:2930/monumentos/", {
             params: params
         })
             .then(response => {
@@ -153,7 +153,7 @@
 
     async function cargarDatosPorDefecto() {
 
-        const responser = await axios.get("http://172.23.186.185:2930/monumentos/")
+        await axios.get("http://localhost:2930/monumentos/")
             .then(response => {
 
                 console.log(response.data);
@@ -191,7 +191,7 @@
     console.log(mapa)
     console.log(marcador)
 
-    cargarDatosPorDefecto()
+    cargarDatosPorDefecto().then(r => console.log("Monumentos cargados por defecto"))
 
 
 

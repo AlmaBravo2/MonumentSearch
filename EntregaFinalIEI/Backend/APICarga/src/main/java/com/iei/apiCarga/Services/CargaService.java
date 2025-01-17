@@ -30,13 +30,13 @@ public class CargaService {
         if(todos)
         {
             MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
-            informe += valencia.getInforme();
+            informe += valencia.getInforme() + "\n";
             informe += guardarDatosService.guardarDatos(valencia.getMonumentos());
             MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
-            informe += euskadi.getInforme();
+            informe += euskadi.getInforme() + "\n";
             informe += guardarDatosService.guardarDatos(euskadi.getMonumentos());
             MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
-            informe += castillaYLeon.getInforme();
+            informe += castillaYLeon.getInforme() + "\n";
             informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
 
         }
@@ -46,19 +46,19 @@ public class CargaService {
             {
                 MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
                 System.out.println(valencia.getMonumentos());
-                informe += "\n" + valencia.getInforme();
+                informe += valencia.getInforme() + "\n";
                 informe += guardarDatosService.guardarDatos(valencia.getMonumentos());
             }
             if(eus)
             {
                 MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
-                informe += "\n" + euskadi.getInforme();
+                informe += euskadi.getInforme() + "\n";
                 informe += guardarDatosService.guardarDatos(euskadi.getMonumentos());
             }
             if(cyl)
             {
                 MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
-                informe += "\n" + castillaYLeon.getInforme();
+                informe += castillaYLeon.getInforme() + "\n";
                 informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
             }
         }

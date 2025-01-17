@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Check;
 
 @Entity
-@Table(name = "monumento")
+@Table(name = "Monumento")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,8 +25,8 @@ public class Monumento {
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
 
-    @Column(name = "direccion", length = 1000, nullable = false)
-    private String direccion;
+    @Column(length = 65535, columnDefinition = "LONGTEXT", name = "descripcion", nullable = false)
+    private String descripcion;
 
     @Column(name = "codigo_postal", length = 5, nullable = false)
     private String codigoPostal;
@@ -37,8 +37,8 @@ public class Monumento {
     @Column(name = "latitud", nullable = false)
     private String latitud;
 
-    @Column(name = "descripcion", length = 1000, nullable = false)
-    private String descripcion;
+    @Column(name = "direccion", length = 1000, nullable = false)
+    private String direccion;
 
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;

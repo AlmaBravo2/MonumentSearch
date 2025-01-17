@@ -70,7 +70,7 @@ public class CargaController {
 
             return new ResponseEntity<>(cargaService.cargarDatos(todos, cv, eus, cyl), headers, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

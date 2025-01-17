@@ -46,19 +46,19 @@ public class CargaService {
             {
                 MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
                 System.out.println(valencia.getMonumentos());
-                informe = valencia.getInforme();
+                informe += "\n" + valencia.getInforme();
                 informe += guardarDatosService.guardarDatos(valencia.getMonumentos());
             }
             if(eus)
             {
                 MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
-                informe = euskadi.getInforme();
+                informe += "\n" + euskadi.getInforme();
                 informe += guardarDatosService.guardarDatos(euskadi.getMonumentos());
             }
             if(cyl)
             {
                 MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
-                informe = castillaYLeon.getInforme();
+                informe += "\n" + castillaYLeon.getInforme();
                 informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
             }
         }

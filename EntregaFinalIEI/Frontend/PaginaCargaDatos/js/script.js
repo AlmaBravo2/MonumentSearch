@@ -33,10 +33,9 @@ async function cargar(){
         })
 
 
-        let informe_text = JSON.stringify(response.data, null, 2).replace(/\\n/g, "<br>").replace(/\"/g, "").replace("Monumentos correctos", '<span style="color: green;">Monumentos correctos</span>').replace("Monumentos modificados", '<span style="color: yellow;">Monumentos modificados</span>');
         //Cambiamos el texto del informe de fallos quitando comillas y saltos de linea
-        document.getElementById("informe-fallos").innerHTML = informe_text;
-             console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
+        document.getElementById("informe fallos").innerHTML = "<p>" + JSON.stringify(response.data, null, 2).replace(/\\n/g, "<br>").replace(/\"/g, "") + "</p>";
+        console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);
     }

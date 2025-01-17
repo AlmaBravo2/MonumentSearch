@@ -32,6 +32,7 @@ async function cargar(){
             timeout: 120000000000
         })
 
+        const reporteRAW = JSON.stringify(response.data, null, 2);
          reporteRAW = reporteRAW.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/"/g, '');
 
                 // Cambiamos el texto del informe de fallos

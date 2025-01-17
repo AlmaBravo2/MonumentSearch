@@ -27,8 +27,7 @@ async function cargar(){
         }
         // Realizar la solicitud POST
         const response = await axios.post(apiBusqueda, params)
-        reporte = response;
-        document.getElementById("informe fallos").textContent = JSON.stringify(reporte.data, null, 2);
+        document.getElementById("informe fallos").textContent = JSON.stringify(response.data, null, 2);
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);

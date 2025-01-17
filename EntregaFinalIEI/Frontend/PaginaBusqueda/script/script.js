@@ -192,7 +192,7 @@
     console.log(mapa)
     console.log(marcador)
 
-    await cargarDatosPorDefecto()
+     cargarDatosPorDefecto()
 
 
 

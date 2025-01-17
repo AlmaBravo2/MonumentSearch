@@ -32,9 +32,9 @@ async function cargar(){
             timeout: 120000000000
         })
 
-        let reporteRAW = JSON.stringify(response.data, null, 2);
+
         //Cambiamos el texto del informe de fallos
-        document.getElementById("informe fallos").innerHTML = reporteRAW.replace(/\n/g, "<br>");
+        document.getElementById("informe fallos").textContent = JSON.stringify(response.data, null, 2);
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);

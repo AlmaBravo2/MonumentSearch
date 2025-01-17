@@ -2,6 +2,7 @@ package com.wrapper.Euskadi;
 
 
 import com.wrapper.Euskadi.Models.*;
+import com.wrapper.Euskadi.Wrapper.JsonMonumento;
 
 import java.util.*;
 

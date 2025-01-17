@@ -1,4 +1,4 @@
-package com.wrapper.Euskadi;
+package com.wrapper.Euskadi.Wrapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 

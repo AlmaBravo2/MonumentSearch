@@ -32,10 +32,6 @@ async function cargar(){
             timeout: 120000
         })
 
-        //Prueba
-        const response2 = await axios.get(hola)
-        console.log(response2.data);
-
         //Cambiamos el texto del informe de fallos
         document.getElementById("informe fallos").textContent = JSON.stringify(response.data, null, 2);
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta

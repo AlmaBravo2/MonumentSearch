@@ -47,9 +47,10 @@ async function cargar(){
 async function borrar() {
     try {
         const response = await axios.delete(apiBorrar);
-
+        document.getElementById("informe fallos").textContent = "Se ha borrado la base de datos correctamente.";
         console.log(response.data);
     }catch (error) {
+        document.getElementById("informe fallos").textContent = "Se ha producido un error en el borrado.";
         console.error("Error en la solicitud de borrado.")
     }
 

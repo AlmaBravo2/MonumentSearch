@@ -1,5 +1,6 @@
 package com.iei.apiCarga.Controllers;
 
+import com.iei.apiCarga.Models.ParamsDTO;
 import com.iei.apiCarga.Services.CargaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -45,19 +46,7 @@ public class CargaController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error al cargar los datos")
     })
     @PostMapping("/carga/")
-    public ResponseEntity<?> cargarDatos(
-            @Parameter(description = "Cargar todos los datos disponibles", example = "true")
-            @RequestParam(name = "todos", defaultValue = "false") boolean todos,
-
-            @Parameter(description = "Cargar datos de la Comunidad Valenciana", example = "true")
-            @RequestParam(name = "cv", defaultValue = "false") boolean cv,
-
-            @Parameter(description = "Cargar datos del País Vasco (Euskadi)", example = "true")
-            @RequestParam(name = "eus", defaultValue = "false") boolean eus,
-
-            @Parameter(description = "Cargar datos de Castilla y León", example = "true")
-            @RequestParam(name = "cyl", defaultValue = "false") boolean cyl
-    ) {
+    public ResponseEntity<?> cargarDatos(@RequestBody @Parameter(description = "Parámetros de carga") ParamsDTO params) {
         try {
             // Cargamos los datos, retornamos el informe con el header Allow
             HttpHeaders headers = new HttpHeaders();
@@ -68,7 +57,7 @@ public class CargaController {
             headers.add("Access-Control-Expose-Headers", "*");
             headers.add("Access-Control-Max-Age", "3600");
 
-            return new ResponseEntity<>(cargaService.cargarDatos(todos, cv, eus, cyl), headers, HttpStatus.OK);
+            return new ResponseEntity<>(cargaService.cargarDatos(params.isTodos(), params.isCv(), params.isEus(), params.isCyl()), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }

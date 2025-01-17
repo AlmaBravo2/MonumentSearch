@@ -30,32 +30,28 @@
         const provincia = provinciaElement.value
 
         //Añadimos a los paramtros los campos que estén llenos
-        const params = new URLSearchParams({
-            localidad: param1,
-            codigoPostal: param2,
-            provincia: param3,
-            tipo: param4,
-        });
+        // Creamos un objeto URLSearchParams para construir los parámetros
+        const params = new URLSearchParams();
 
         if (localidad) {
-            params.localidad = localidad.toUpperCase();
+            params.append("localidad", localidad.toUpperCase());
         }
 
         if (codigoPostal) {
-            params.codigoPostal = codigoPostal;
+            params.append("codigoPostal", codigoPostal);
         }
 
         if (provincia) {
-            params.provincia = provincia.toUpperCase();
-        }
-        if (tipoElement.value || tipoElement.value !== "Todos") {
-            params.tipo = tipoElement.value;
+            params.append("provincia", provincia.toUpperCase());
         }
 
+        if (tipo && tipo !== "Todos") {
+            params.append("tipo", tipo);
+        }
 
-
-        const url ="http://localhost:2930/monumentos/?${params.toString()};"
-        console.log(url);
+        // Construimos la URL con los parámetros
+        const url = `http://localhost:2930/monumentos/?${params.toString()}`;
+        console.log("URL construida:", url);
         //Realizamos la petición a la API
         await axios.get(url)
             .then(response => {

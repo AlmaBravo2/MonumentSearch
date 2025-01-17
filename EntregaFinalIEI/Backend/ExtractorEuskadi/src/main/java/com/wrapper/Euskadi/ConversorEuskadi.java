@@ -44,7 +44,7 @@ public class ConversorEuskadi {
             Localidad localidad = new Localidad();
             localidad.setNombre(monumento.getMunicipality().toUpperCase());
             Provincia provincia = new Provincia();
-            provincia.setCodigo(Integer.parseInt(postalCode));
+            provincia.setCodigo(Integer.parseInt(postalCode.substring(0,2)));
             provincia.setNombre(monumento.getTerritory().toUpperCase());
             localidad.setProvincia(provincia);
             monumentosConvertidos.add(new MonumentoConvertidoEuskadi(
@@ -78,7 +78,7 @@ public class ConversorEuskadi {
         } else if (nombre.contains("monasterio") || nombre.contains("convento")) {
             tipo = "Monasterio-Convento";
         } else if (nombre.contains("castillo") || nombre.contains("torre") || nombre.contains("muralla") || nombre.contains("fortaleza")) {
-            tipo = "Castillo-Fortalez-Torre";
+            tipo = "Castillo-Fortaleza-Torre";
         } else if (nombre.contains("palacio") || nombre.contains("casa") || nombre.contains("museo")){
             tipo = "Edificio singular";
         }

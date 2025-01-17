@@ -33,8 +33,8 @@ async function cargar(){
         })
 
 
-        //Cambiamos el texto del informe de fallos
-        document.getElementById("informe fallos").innerHTML = "<p>" + JSON.stringify(response.data, null, 2).replace(/\\n/g, "<br>") + "</p>";
+        //Cambiamos el texto del informe de fallos quitando comillas y saltos de linea
+        document.getElementById("informe fallos").innerHTML = "<p>" + JSON.stringify(response.data, null, 2).replace(/\\n/g, "<br>").replace(/\"/g, "") + "</p>";
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);

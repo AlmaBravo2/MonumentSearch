@@ -32,7 +32,11 @@ async function cargar(){
             timeout: 120000000000
         })
 
-
+        const reporteRAW = JSON.stringify(response.data, null, 2);
+        //Hacemos que se eliminen los saltos de línea
+        reporteRAW.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        //Hacemos que aparezca texto y no con las comillas de String
+        reporteRAW.replace(/"/g, '');
         //Cambiamos el texto del informe de fallos
         const informeElement = document.getElementById("informe fallos");
                 informeElement.textContent = reporteRAW; // No uses innerHTML

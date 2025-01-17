@@ -1,12 +1,15 @@
+document.addEventListener("DOMContentLoaded", async function() {
+
+
 //Creamos el mapa con el marcador en España
 
-var monumentos = []
+    var monumentos = []
 
-var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444630583], 6)
+    var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444630583], 6)
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png?", {}).addTo(mapa)
 
 //Declaramos la API de búsqueda que tenemos lanzada en la máquina virtual
-    const apiBusqueda = "http://172.23.186.185:2930/monumentos/"
+    const apiBusqueda = "http://localhost:2930/monumentos/"
 
 //Cogemos los valores por los que queremos filtrar
     var localidadElement = document.getElementById("localidad")
@@ -19,9 +22,8 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
     const buttonCancel = document.getElementById("cancel")
 
 
-
 //Realizamos la búsqueda a la API
-     async function buscarMonumentos() {
+    async function buscarMonumentos() {
 
         //Cogemos los valoresque vamos a filtrar
         const localidad = localidadElement.value
@@ -29,35 +31,34 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
         const provincia = provinciaElement.value
 
         //Añadimos a los paramtros los campos que estén llenos
-        const params ={} ;
+        const params = {};
 
-        if(localidad){
+        if (localidad) {
             params.localidad = localidad.toUpperCase();
         }
 
-        if(codigoPostal){
+        if (codigoPostal) {
             console.log("Entra")
             params.codigoPostal = codigoPostal;
         }
 
-        if (provincia){
+        if (provincia) {
             console.log("Entra")
             params.provincia = provincia.toUpperCase();
         }
-       if(tipoElement.value || tipoElement.value!=="Todos"){
+        if (tipoElement.value || tipoElement.value !== "Todos") {
             params.tipo = tipoElement.value;
         }
 
 
         //Realizamos la petición a la API
-         axios.get("http://172.23.186.185:2930/monumentos/",{
+        const result = await axios.get("http://172.23.186.185:2930/monumentos/", {
             params: params
         })
             .then(response => {
                 console.log(response.data);
                 var monumentosBuscar = response.data.map(item => {
                     const m = item.monumento; // Acceder al objeto "monumento"
-
 
 
                     return new Monumento(
@@ -89,11 +90,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
     //Limpiamos los campos al hacer clic en el botón
     var marcador = L.marker([4.6281045, -74.0654527]).addTo(mapa)
 
-    const circulo = L.circle([4.613573, -74.063889], {
-        radius: 1000,
-        color: "green"
-    }).addTo(mapa)
-    circulo.bindPopup("Programación en SIG")
+
 
     const tabla = document.getElementById("table")
     var markers = []
@@ -107,8 +104,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
             marker.remove()
         }
         //Borramos los datos de la tabla
-        for(let i = monumentosTableBody.rows.length - 1; i > 0; i--)
-        {
+        for (let i = monumentosTableBody.rows.length - 1; i > 0; i--) {
             monumentosTableBody.deleteRow(i);
         }
 
@@ -156,17 +152,14 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
     }
 
 
-    async function cargarDatosPorDefecto(){
+    async function cargarDatosPorDefecto() {
 
-       axios.get("http://172.23.186.185:2930/monumentos/")
-            .then( response => {
+        const responser = await axios.get("http://172.23.186.185:2930/monumentos/")
+            .then(response => {
 
                 console.log(response.data);
                 monumentosDefecto = response.data.map(item => {
                     const m = item.monumento; // Acceder al objeto "monumento"
-
-
-
 
 
                     return new Monumento(
@@ -186,23 +179,21 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
                 cargarDatos(monumentosDefecto);
                 // Si deseas devolver la lista de monumentos, puedes hacerlo aquí
 
-                         })
+            })
             .catch(error => {
                 console.error("Error en la solicitud:", error);
             });
 
 
-
     }
 
     //Accionamos el reseteo de monumentos cuando se hace click
-        buttonCancel.addEventListener("click", cargarDatosPorDefecto)
+    buttonCancel.addEventListener("click", cargarDatosPorDefecto)
 
 
-
-
-     cargarDatosPorDefecto()
+    cargarDatosPorDefecto()
     console.log(mapa)
     console.log(marcador)
-//console.log(circulo)
+
+});
 

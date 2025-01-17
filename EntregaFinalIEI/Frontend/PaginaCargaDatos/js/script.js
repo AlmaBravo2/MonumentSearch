@@ -1,4 +1,10 @@
-const buttonCargar = document.getElementById("buttonCargar");
+document.addEventListener("DOMContentLoaded", async function() {
+
+
+
+
+
+    const buttonCargar = document.getElementById("buttonCargar");
 const selectAllCheckbox = document.getElementById("selectAll");
 const regionCheckboxes = document.querySelectorAll(".region");
 const regionCastilla = document.getElementById("castillaYLeon");
@@ -6,7 +12,7 @@ const regionValencia = document.getElementById("comunitatValenciana");
 const regionEuskadi = document.getElementById("euskadi");
 
 reporte = "";
-const apiBusqueda = "http://172.23.186.185:810/carga/";
+const apiBusqueda = "http://localhost:810/carga/";
 
 async function cargar(){
     try {
@@ -21,8 +27,7 @@ async function cargar(){
         }
         // Realizar la solicitud POST
         const response = await axios.post(apiBusqueda, params)
-        reporte = response;
-        document.getElementById("informe fallos").textContent = JSON.stringify(reporte.data, null, 2);
+        document.getElementById("informe fallos").textContent = JSON.stringify(response.data, null, 2);
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);
@@ -54,5 +59,5 @@ regionCheckboxes.forEach(checkbox => {
     });
 });
 
-buttonCargar.addEventListener("click", cargar);
+buttonCargar.addEventListener("click", cargar);});
 

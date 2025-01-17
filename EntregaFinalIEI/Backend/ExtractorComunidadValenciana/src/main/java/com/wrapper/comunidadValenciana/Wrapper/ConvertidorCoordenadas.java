@@ -1,4 +1,4 @@
-package com.wrapper.comunidadValenciana.Logic;
+package com.wrapper.comunidadValenciana.Wrapper;
 
 import com.wrapper.comunidadValenciana.Models.*;
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.wrapper.comunidadValenciana.Logic.CSVMonumento.getMonumentos;
+import static com.wrapper.comunidadValenciana.Wrapper.CSVMonumento.getMonumentos;
 
 
 // Clase que utliza Selenium para convertir las coordenadas UTM de los monumentos a coordenadas geográficas

@@ -21,7 +21,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
 
 //Realizamos la búsqueda a la API
-    async function buscarMonumentos() {
+     async function buscarMonumentos() {
 
         //Cogemos los valoresque vamos a filtrar
         const localidad = localidadElement.value
@@ -50,7 +50,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
 
         //Realizamos la petición a la API
-        axios.get("http://172.23.186.185:2930/monumentos/",{
+        const response = await axios.get("http://172.23.186.185:2930/monumentos/",{
             params: params
         })
             .then(response => {
@@ -88,7 +88,6 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
     //Limpiamos los campos al hacer clic en el botón
     var marcador = L.marker([4.6281045, -74.0654527]).addTo(mapa)
-    marcador.bindPopup("Hola GeoCositas")
 
     const circulo = L.circle([4.613573, -74.063889], {
         radius: 1000,
@@ -159,7 +158,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
     async function cargarDatosPorDefecto(){
 
-        axios.get("http://172.23.186.185:2930/monumentos/")
+       const response = await  axios.get("http://172.23.186.185:2930/monumentos/")
             .then( response => {
 
                 console.log(response.data);
@@ -202,7 +201,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
 
 
-    cargarDatosPorDefecto()
+    await cargarDatosPorDefecto()
     console.log(mapa)
     console.log(marcador)
 //console.log(circulo)

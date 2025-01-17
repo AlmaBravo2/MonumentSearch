@@ -30,19 +30,22 @@
         const provincia = provinciaElement.value
 
         //Añadimos a los paramtros los campos que estén llenos
-        const params = {};
+        const params = new URLSearchParams({
+            localidad: param1,
+            codigoPostal: param2,
+            provincia: param3,
+            tipo: param4,
+        });
 
         if (localidad) {
             params.localidad = localidad.toUpperCase();
         }
 
         if (codigoPostal) {
-            console.log("Entra")
             params.codigoPostal = codigoPostal;
         }
 
         if (provincia) {
-            console.log("Entra")
             params.provincia = provincia.toUpperCase();
         }
         if (tipoElement.value || tipoElement.value !== "Todos") {
@@ -50,12 +53,11 @@
         }
 
 
+
+        const url ="http://localhost:2930/monumentos/?${params.toString()};"
+        console.log(url);
         //Realizamos la petición a la API
-        await axios.get("http://localhost:2930/monumentos/", {
-            params:{
-                provincia: BIZKAIA
-            }
-        })
+        await axios.get(url)
             .then(response => {
                 console.log(response.data);
                 var monumentosBuscar = response.data.map(item => {

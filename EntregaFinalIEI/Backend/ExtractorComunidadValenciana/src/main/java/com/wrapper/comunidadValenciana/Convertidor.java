@@ -1,4 +1,4 @@
-package com.wrapper.comunidadValenciana.Logic;
+package com.wrapper.comunidadValenciana;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,12 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.wrapper.comunidadValenciana.Models.*;
 import com.wrapper.comunidadValenciana.Utils.LevenshteinComparator;
 import com.wrapper.comunidadValenciana.Utils.MonumentLocator;
-import org.checkerframework.checker.units.qual.C;
 
-import static com.wrapper.comunidadValenciana.Logic.ConvertidorCoordenadas.convertirCoordenadas;
+import static com.wrapper.comunidadValenciana.Wrapper.ConvertidorCoordenadas.convertirCoordenadas;
 
 public class Convertidor {
 

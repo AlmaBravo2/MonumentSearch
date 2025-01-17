@@ -1,7 +1,6 @@
-package com.wrapper.comunidadValenciana.Logic;
+package com.wrapper.comunidadValenciana.Wrapper;
 
 import com.wrapper.comunidadValenciana.Models.MonumentoOriginal;
-import com.wrapper.comunidadValenciana.Utils.MonumentLocator;
 import com.wrapper.comunidadValenciana.Utils.TextSanitizer;
 import java.io.*;
 import java.util.ArrayList;

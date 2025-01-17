@@ -27,7 +27,7 @@ async function cargar(){
         }
         // Realizar la solicitud POST
         console.log(JSON.stringify(params, null, 2));
-        console.log(apiBusqueda);
+        console.log(apiCarga);
         const response = await axios.post(apiCarga, params,{
             timeout: 120000
         })

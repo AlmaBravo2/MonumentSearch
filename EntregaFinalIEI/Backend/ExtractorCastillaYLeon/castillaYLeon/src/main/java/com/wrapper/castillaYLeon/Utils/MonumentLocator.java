@@ -38,15 +38,17 @@ public class MonumentLocator {
         return null;
     }
     public static String getMonumentDirection(String longitude, String latitude) {
-       HttpResponse<String> response = getMonumentLocationInfo(longitude, latitude);
-         try {
-              ObjectMapper mapper = new ObjectMapper();
-              JsonNode rootNode = mapper.readTree(response.body());
-              return rootNode.get("display_name").asText();
-         } catch (Exception e) {
-              e.printStackTrace();
-         }
-         return null;
+        HttpResponse<String> response = getMonumentLocationInfo(longitude, latitude);
+
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(response.body());
+            return rootNode.get("display_name").asText();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static String getMonumentPostCode(String longitude,String latitude){

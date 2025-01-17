@@ -211,8 +211,9 @@ public class ConvertidorCLE {
                         monumento.setDireccion(calle);
                     } else {
                         //SI LA DIRECCION ES NULL, OBTENEMOS LA DIRECCION A PARTIR DE LAS COORDENADAS
-                        calle = MonumentLocator.getMonumentDirection(monumento.getLongitud(),monumento.getLatitud());
+                            calle = MonumentLocator.getMonumentDirection(monumento.getLatitud(),monumento.getLongitud());
                         monumento.setDireccion(calle);
+
                         modificados.put(monumento.getNombre(), "Se ha obtenido la dirección a partir de las coordenadas");
                     }
 
@@ -224,7 +225,7 @@ public class ConvertidorCLE {
                         //SI EL CODIGO POSTAL ES NULL, SE OBTIENE A PARTIR DE LAS COORDENADAS
                         String latitud = monumento.getLatitud();
                         String longitud = monumento.getLongitud();
-                        String codigoPostalAPI = MonumentLocator.getMonumentPostCode(longitud,latitud);
+                        String codigoPostalAPI = MonumentLocator.getMonumentPostCode(latitud,longitud);
 
                         if (codigoPostalAPI != null && !codigoPostalAPI.isEmpty()) {
                             monumento.setCodigo_postal(codigoPostalAPI);

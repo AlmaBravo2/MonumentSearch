@@ -54,5 +54,5 @@ regionCheckboxes.forEach(checkbox => {
     });
 });
 
-buttonCargar.addEventListener("click", cargar);
+buttonCargar.addEventListener("click",await cargar);
 

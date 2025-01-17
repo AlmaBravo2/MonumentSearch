@@ -107,7 +107,7 @@
             //Creamos un marcador en el mapa para cada monumento
             var marcador = L.marker([monumento.longitud, monumento.latitud]).addTo(mapa)
             markers.push(marcador)
-            marcador.bindPopup(monumento.nombre + "/n/n" +
+            marcador.bindPopup(monumento.nombre + "<br><br>" +
                 monumento.direccion + "/n/n" +
                 "Tipo: " + monumento.tipo + "/n/n" +
                 monumento.descripcion + "/n/n" +

@@ -6,8 +6,7 @@
     var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444630583], 6)
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png?", {}).addTo(mapa)
 
-//Declaramos la API de búsqueda que tenemos lanzada en la máquina virtual
-    const apiBusqueda = "http://localhost:2930/monumentos/"
+
 
 //Cogemos los valores por los que queremos filtrar
     var localidadElement = document.getElementById("localidad")
@@ -57,7 +56,7 @@
         await axios.get(url)
             .then(response => {
                 console.log(response.data);
-                var monumentos = response.data.map(item => {
+                monumentos = response.data.map(item => {
                     const m = item.monumento; // Acceder al objeto "monumento"
 
 
@@ -163,6 +162,9 @@
         if (checkBox.checked) {
             cargarDatosMapa(monumentos)
         }
+        else {
+            cargarDatosMapaPorDefecto()
+        }
     })
 
     //Método para cargar la tabla
@@ -212,9 +214,39 @@
         }
     }
 
+    async function cargarDatosMapaPorDefecto(){
+        const res = await axios.get("http://localhost:2930/monumentos/")
+            .then(response => {
+
+                console.log(response.data);
+                monumentosDefecto = response.data.map(item => {
+                    const m = item.monumento; // Acceder al objeto "monumento"
+
+
+                    return new Monumento(
+                        m.id,
+                        m.nombre,
+                        m.direccion,
+                        m.codigoPostal, // Asegúrate de que el nombre del campo coincida
+                        m.longitud,
+                        m.latitud,
+                        m.descripcion,
+                        m.tipo,
+                        m.localidad.nombre, // Acceder al nombre de la localidad
+                        m.localidad.provincia.nombre // Acceder al nombre de la provincia
+                    );
+                });
+
+                cargarDatosMapa(monumentosDefecto);
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+            });
+    }
 
 
 
+//Cragamos los datos al principio
      cargarDatosPorDefecto()
 
 

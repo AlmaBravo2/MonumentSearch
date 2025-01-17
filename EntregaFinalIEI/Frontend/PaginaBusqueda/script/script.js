@@ -6,7 +6,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png?", {}).addTo(mapa)
 
 //Declaramos la API de búsqueda que tenemos lanzada en la máquina virtual
-    const apiBusqueda = "http://172.23.186.185:2930/monumentos/"
+    const apiBusqueda = "http://localhost:2930/monumentos/"
 
 //Cogemos los valores por los que queremos filtrar
     var localidadElement = document.getElementById("localidad")

@@ -150,7 +150,6 @@ public class ConvertidorCLE {
                                 !provincia1.equals("Segovia")) {
                             provincia1 = "Segovia";
                             modificados.put(monumento.getNombre(),"Error tipográfico en el nombre de la provincia");
-                            System.out.println("Modificación en provincia para: " + monumento.getNombre()); // Depuración
                         }
                         if(LevenshteinComparator.calculateLevenshteinDistance(provincia1,"León") < 3 &&
                                 !provincia1.equals("León")) {
@@ -250,10 +249,10 @@ public class ConvertidorCLE {
                         contadorDeCorrectos++; // Incrementa si el monumento no está en los modificados
                     }else {
                         if (modificados.containsKey(monumento.getNombre())) {
-                            System.out.println("Monumento modificado: " + monumento.getNombre()); // Depuración
+                            System.out.println("Monumento modificado: " + monumento.getNombre());
                         }
                         if (rechazados.containsKey(monumento.getNombre())) {
-                            System.out.println("Monumento rechazado: " + monumento.getNombre()); // Depuración
+                            System.out.println("Monumento rechazado: " + monumento.getNombre());
                         }
                     }
 

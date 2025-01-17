@@ -1,7 +1,6 @@
 package com.wrapper.castillaYLeon.Logic;
 
-import com.wrapper.castillaYLeon.Models.MonumentoCLE;
-import com.wrapper.castillaYLeon.Models.MonumentosDTO;
+import com.wrapper.castillaYLeon.Models.*;
 import com.wrapper.castillaYLeon.Utils.LevenshteinComparator;
 import com.wrapper.castillaYLeon.Utils.MonumentLocator;
 import org.jsoup.Jsoup;
@@ -355,7 +354,32 @@ public class ConvertidorCLE {
         informe += "Monumentos rechazados: " + numRechazados + " -> Desglose: " + rechazados + "\n";
         informe += "Monumentos modificados: " + numModificados + " -> Desglose: " + modificados + "\n";
 
-        return new MonumentosDTO(monumentosObtenidos.stream().distinct().collect(Collectors.toList()), informe);
+        //Convertir MonumentoCLE a MonumentoDTO
+        List<MonumentoCLE> monumentos = monumentosObtenidos.stream().distinct().collect(Collectors.toList());
+
+        List<MonumentoDTO> monumentosDTO = new ArrayList<>();
+        for (MonumentoCLE monumento : monumentos) {
+            Localidad localidad = new Localidad();
+            Provincia provincia = new Provincia();
+            provincia.setNombre(monumento.getProvincia().toUpperCase());
+            provincia.setCodigo(Integer.parseInt(monumento.getCodigo_postal().substring(0, 2)));
+            localidad.setNombre(monumento.getLocalidad().toUpperCase());
+            localidad.setProvincia(provincia);
+            MonumentoDTO monumentoDTO = new MonumentoDTO();
+            monumentoDTO.setNombre(monumento.getNombre());
+            monumentoDTO.setTipo(monumento.getTipo());
+            monumentoDTO.setDireccion(monumento.getDireccion());
+            monumentoDTO.setCodigoPostal(monumento.getCodigo_postal());
+            monumentoDTO.setLongitud(monumento.getLongitud());
+            monumentoDTO.setLatitud(monumento.getLatitud());
+            String descripcion = monumento.getDescripcion();
+            descripcion = descripcion.substring(0, Math.min(descripcion.length(), 1000));
+            monumentoDTO.setDescripcion(descripcion);
+            monumentoDTO.setLocalidad(localidad);
+            monumentosDTO.add(monumentoDTO);
+        }
+
+        return new MonumentosDTO(monumentosDTO, informe);
     }
 }
 

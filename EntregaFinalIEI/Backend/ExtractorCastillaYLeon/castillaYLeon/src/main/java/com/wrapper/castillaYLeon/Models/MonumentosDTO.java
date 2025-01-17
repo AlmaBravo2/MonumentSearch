@@ -12,6 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MonumentosDTO {
-    private List<MonumentoCLE> monumentos;
+    private List<MonumentoDTO> monumentos;
     private String informe;
 }

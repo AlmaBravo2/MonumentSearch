@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", async function() {
 
 
 //Creamos el mapa con el marcador en España
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
         //Realizamos la petición a la API
-        const result = await axios.get("http://172.23.186.185:2930/monumentos/", {
+        await axios.get("http://172.23.186.185:2930/monumentos/", {
             params: params
         })
             .then(response => {
@@ -189,11 +188,10 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     //Accionamos el reseteo de monumentos cuando se hace click
     buttonCancel.addEventListener("click", cargarDatosPorDefecto)
-
-
-    cargarDatosPorDefecto()
     console.log(mapa)
     console.log(marcador)
 
-});
+    cargarDatosPorDefecto()
+
+
 

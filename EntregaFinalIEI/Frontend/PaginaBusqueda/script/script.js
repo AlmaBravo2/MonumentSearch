@@ -108,9 +108,9 @@
             var marcador = L.marker([monumento.longitud, monumento.latitud]).addTo(mapa)
             markers.push(marcador)
             marcador.bindPopup(monumento.nombre + "<br><br>" +
-                monumento.direccion + "/n/n" +
-                "Tipo: " + monumento.tipo + "/n/n" +
-                monumento.descripcion + "/n/n" +
+                monumento.direccion + "<br><br>" +
+                "Tipo: " + monumento.tipo + "<br><br>" +
+                monumento.descripcion + "<br><br>" +
                 monumento.longitud + " " + monumento.latitud)
 
         }

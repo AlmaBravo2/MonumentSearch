@@ -28,6 +28,7 @@
         const localidad = localidadElement.value
         const codigoPostal = codigo_postalElement.value
         const provincia = provinciaElement.value
+        const tipo = tipoElement.value
 
         //Añadimos a los paramtros los campos que estén llenos
         // Creamos un objeto URLSearchParams para construir los parámetros

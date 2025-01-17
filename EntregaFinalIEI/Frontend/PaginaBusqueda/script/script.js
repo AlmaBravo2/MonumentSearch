@@ -1,7 +1,6 @@
 
 
-//Creamos el mapa con el marcador en España
-
+//Creamos una variable documentos para guardar los monumentos buscados
     var monumentos = []
 
     var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444630583], 6)
@@ -21,7 +20,7 @@
     const buttonCancel = document.getElementById("cancel")
 
 
-//Realizamos la búsqueda a la API
+//Realizamos la búsqueda a la API de búsqueda con los filtros
     async function buscarMonumentos() {
 
         //Cogemos los valoresque vamos a filtrar
@@ -53,11 +52,12 @@
         // Construimos la URL con los parámetros
         const url = `http://localhost:2930/monumentos/?${params.toString()}`;
         console.log("URL construida:", url);
+        monumentos=[]
         //Realizamos la petición a la API
         await axios.get(url)
             .then(response => {
                 console.log(response.data);
-                var monumentosBuscar = response.data.map(item => {
+                var monumentos = response.data.map(item => {
                     const m = item.monumento; // Acceder al objeto "monumento"
 
 
@@ -74,7 +74,7 @@
                         m.localidad.provincia.nombre // Acceder al nombre de la provincia
                     );
                 });
-                cargarDatos(monumentosBuscar)
+                crearTabla(monumentos);
             })
             .catch(error => {
                 console.error("Error en la solicitud:", error);
@@ -87,30 +87,25 @@
     buttonSearch.addEventListener("click", buscarMonumentos)
 
 
-    //Limpiamos los campos al hacer clic en el botón
-    var marcador = L.marker([4.6281045, -74.0654527]).addTo(mapa)
 
 
 
-    const tabla = document.getElementById("table")
+
+
+
+//Método para cargar los datos en el mapa
     var markers = []
-    var monumentosTableBody = document.getElementById("table").getElementsByTagName("tbody")[0];
 
-
-    function cargarDatos(monumentosCargar) {
+    function cargarDatosMapa(monumentosCargar) {
 
         //Borramos los markers del mapa
         for (const marker of markers) {
             marker.remove()
         }
-        //Borramos los datos de la tabla
-        for (let i = monumentosTableBody.rows.length - 1; i > 0; i--) {
-            monumentosTableBody.deleteRow(i);
-        }
 
 
         for (const monumento of monumentosCargar) {
-
+            //Creamos un marcador en el mapa para cada monumento
             var marcador = L.marker([monumento.longitud, monumento.latitud]).addTo(mapa)
             markers.push(marcador)
             marcador.bindPopup(monumento.nombre + "/n/n" +
@@ -118,6 +113,71 @@
                 "Tipo: " + monumento.tipo + "/n/n" +
                 monumento.descripcion + "/n/n" +
                 monumento.longitud + " " + monumento.latitud)
+
+        }
+    }
+
+    //Se cargan todos los datos de la base de datos
+    async function cargarDatosPorDefecto() {
+
+        const res = await axios.get("http://localhost:2930/monumentos/")
+            .then(response => {
+
+                console.log(response.data);
+                monumentosDefecto = response.data.map(item => {
+                    const m = item.monumento; // Acceder al objeto "monumento"
+
+
+                    return new Monumento(
+                        m.id,
+                        m.nombre,
+                        m.direccion,
+                        m.codigoPostal, // Asegúrate de que el nombre del campo coincida
+                        m.longitud,
+                        m.latitud,
+                        m.descripcion,
+                        m.tipo,
+                        m.localidad.nombre, // Acceder al nombre de la localidad
+                        m.localidad.provincia.nombre // Acceder al nombre de la provincia
+                    );
+                });
+
+                cargarDatosMapa(monumentosDefecto);
+                crearTabla(monumentosDefecto);
+
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+            });
+
+
+    }
+
+    //Accionamos el reseteo de monumentos cuando se hace click
+    buttonCancel.addEventListener("click", cargarDatosPorDefecto)
+    console.log(mapa)
+
+    //Cargamos los datos de la búsqueda en el mapa al seleccionar el checkbox
+    const checkBox = document.getElementById("showResults")
+    checkBox.addEventListener("change", function () {
+        if (checkBox.checked) {
+            cargarDatosMapa(monumentos)
+        }
+    })
+
+    //Método para cargar la tabla
+    const tabla = document.getElementById("table")
+    var monumentosTableBody = document.getElementById("table").getElementsByTagName("tbody")[0];
+    function crearTabla(monumentosCargar){
+        //Borramos los datos de la tabla
+
+        for (let i = monumentosTableBody.rows.length - 1; i > 0; i--) {
+            monumentosTableBody.deleteRow(i);
+        }
+
+
+        for (const monumento of monumentosCargar) {
+            //Creamos una fila de la tabla para cada monumento
             const nuevaFila = document.createElement("tr")
             const celdaNombre = document.createElement("td")
             const celdaTipo = document.createElement("td")
@@ -153,45 +213,7 @@
     }
 
 
-    async function cargarDatosPorDefecto() {
 
-        const res = await axios.get("http://localhost:2930/monumentos/")
-            .then(response => {
-
-                console.log(response.data);
-                monumentosDefecto = response.data.map(item => {
-                    const m = item.monumento; // Acceder al objeto "monumento"
-
-
-                    return new Monumento(
-                        m.id,
-                        m.nombre,
-                        m.direccion,
-                        m.codigoPostal, // Asegúrate de que el nombre del campo coincida
-                        m.longitud,
-                        m.latitud,
-                        m.descripcion,
-                        m.tipo,
-                        m.localidad.nombre, // Acceder al nombre de la localidad
-                        m.localidad.provincia.nombre // Acceder al nombre de la provincia
-                    );
-                });
-
-                cargarDatos(monumentosDefecto);
-                // Si deseas devolver la lista de monumentos, puedes hacerlo aquí
-
-            })
-            .catch(error => {
-                console.error("Error en la solicitud:", error);
-            });
-
-
-    }
-
-    //Accionamos el reseteo de monumentos cuando se hace click
-    buttonCancel.addEventListener("click", cargarDatosPorDefecto)
-    console.log(mapa)
-    console.log(marcador)
 
      cargarDatosPorDefecto()
 

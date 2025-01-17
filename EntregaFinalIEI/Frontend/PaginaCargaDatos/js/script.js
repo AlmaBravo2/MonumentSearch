@@ -34,7 +34,9 @@ async function cargar(){
 
 
         //Cambiamos el texto del informe de fallos
-        document.getElementById("informe fallos").innerHTML = JSON.stringify(response.data, null, 2);
+        const informeElement = document.getElementById("informe fallos");
+                informeElement.textContent = reporteRAW; // No uses innerHTML
+                informeElement.style.whiteSpace = "pre-wrap";
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);

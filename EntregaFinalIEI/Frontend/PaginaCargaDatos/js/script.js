@@ -32,15 +32,9 @@ async function cargar(){
             timeout: 120000000000
         })
 
-        const reporteRAW = JSON.stringify(response.data, null, 2);
-         reporteRAW = reporteRAW.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/"/g, '');
 
-                // Cambiamos el texto del informe de fallos
-                const informeElement = document.getElementById("informe fallos");
-                if (informeElement) {
-                    informeElement.innerHTML = reporteRAW; // Usamos innerHTML para interpretar <br>
-                    informeElement.style.whiteSpace = "pre-wrap";
-                }
+        //Cambiamos el texto del informe de fallos
+        document.getElementById("informe fallos").innerHTML = JSON.stringify(response.data, null, 2).replace(/\\n/g, "<br>");
         console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);

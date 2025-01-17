@@ -34,8 +34,15 @@ async function cargar(){
 
 
         //Cambiamos el texto del informe de fallos quitando comillas y saltos de linea
-        document.getElementById("informe fallos").innerHTML = "<p>" + JSON.stringify(response.data, null, 2).replace(/\\n/g, "<br>").replace(/\"/g, "").replace("Monumentos correctos","" <span style="color: #ff6666;">"Monumentos rechazados</span"") + "</p>";
-        console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
+        document.getElementById("informe-fallos").innerHTML =
+            "<p>" +
+            JSON.stringify(response.data, null, 2)
+                .replace(/\\n/g, "<br>") // Reemplaza saltos de línea
+                .replace(/\"/g, "") // Elimina comillas
+                .replace("Monumentos correctos", '<span style="color: green;">Monumentos correctos</span>') // Verde para correctos
+                .replace("Monumentos modificados", '<span style="color: yellow;">Monumentos modificados</span>') // Amarillo para modificados
+            + "</p>";
+             console.log("Respuesta del servidor:", response.data); // Manejar la respuesta
     } catch (error) {
         console.error("Error en la solicitud:", error);
     }

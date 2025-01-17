@@ -50,7 +50,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
 
         //Realizamos la petición a la API
-        const response = await axios.get("http://172.23.186.185:2930/monumentos/",{
+         axios.get("http://172.23.186.185:2930/monumentos/",{
             params: params
         })
             .then(response => {
@@ -158,7 +158,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
     async function cargarDatosPorDefecto(){
 
-       const response = await  axios.get("http://172.23.186.185:2930/monumentos/")
+       axios.get("http://172.23.186.185:2930/monumentos/")
             .then( response => {
 
                 console.log(response.data);
@@ -201,7 +201,7 @@ var mapa = L.map("contenedor-del-mapa").setView([40.41692954150457, -3.667879444
 
 
 
-    await cargarDatosPorDefecto()
+     cargarDatosPorDefecto()
     console.log(mapa)
     console.log(marcador)
 //console.log(circulo)

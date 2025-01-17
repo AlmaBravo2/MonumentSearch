@@ -29,7 +29,7 @@ async function cargar(){
         console.log(JSON.stringify(params, null, 2));
         console.log(apiCarga);
         const response = await axios.post(apiCarga, params,{
-            timeout: 120000
+            timeout: 120000000000
         })
 
         //Cambiamos el texto del informe de fallos

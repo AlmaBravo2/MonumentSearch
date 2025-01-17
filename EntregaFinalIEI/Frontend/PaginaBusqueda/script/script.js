@@ -51,9 +51,11 @@
 
 
         //Realizamos la petición a la API
-        await axios.get("http://localhost:2930/monumentos/?provincia=BIZKAIA", /*{
-            params: params
-        }*/)
+        await axios.get("http://localhost:2930/monumentos/", {
+            params:{
+                provincia: BIZKAIA
+            }
+        })
             .then(response => {
                 console.log(response.data);
                 var monumentosBuscar = response.data.map(item => {

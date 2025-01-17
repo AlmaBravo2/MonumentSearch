@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 
 
-
-
+const buttonBorrar = document.getElementById("buttonBorrar");
     const buttonCargar = document.getElementById("buttonCargar");
 const selectAllCheckbox = document.getElementById("selectAll");
 const regionCheckboxes = document.querySelectorAll(".region");
@@ -12,8 +11,8 @@ const regionValencia = document.getElementById("comunitatValenciana");
 const regionEuskadi = document.getElementById("euskadi");
 
 reporte = "";
-const apiBusqueda = "http://localhost:810/carga/";
-const hola = "http://localhost:2202/hola";
+const apiCarga = "http://localhost:810/carga/";
+const apiBorrar = "http://localhost:810/vaciar";
 
 async function cargar(){
     try {
@@ -29,7 +28,7 @@ async function cargar(){
         // Realizar la solicitud POST
         console.log(JSON.stringify(params, null, 2));
         console.log(apiBusqueda);
-        const response = await axios.post(apiBusqueda, params,{
+        const response = await axios.post(apiCarga, params,{
             timeout: 120000
         })
 
@@ -43,6 +42,17 @@ async function cargar(){
     } catch (error) {
         console.error("Error en la solicitud:", error);
     }
+}
+
+async function borrar() {
+    try {
+        const response = await axios.delete(apiBorrar);
+
+        console.log(response.data);
+    }catch (error) {
+        console.error("Error en la solicitud de borrado.")
+    }
+
 }
 
 
@@ -70,5 +80,7 @@ regionCheckboxes.forEach(checkbox => {
     });
 });
 
-buttonCargar.addEventListener("click", cargar);});
+buttonCargar.addEventListener("click", cargar);
+buttonBorrar.addEventListener("click", borrar)
 
+});

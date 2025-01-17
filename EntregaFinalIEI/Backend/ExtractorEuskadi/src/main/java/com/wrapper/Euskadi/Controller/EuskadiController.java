@@ -25,8 +25,4 @@ public class EuskadiController {
         return new ResponseEntity<>(euskadiService.getMonumentos(), HttpStatus.OK);
     }
 
-    @GetMapping("/hola")
-    public String hola() {
-        return "Hola Alma!";
-    }
 }

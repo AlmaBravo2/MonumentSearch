@@ -31,13 +31,13 @@ public class CargaService {
         {
             MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
             informe += valencia.getInforme() + "\n";
-            informe += guardarDatosService.guardarDatos(valencia.getMonumentos()) + "\n";
+            informe += guardarDatosService.guardarDatos(valencia.getMonumentos());
             MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
             informe += euskadi.getInforme() + "\n";
-            informe += guardarDatosService.guardarDatos(euskadi.getMonumentos() )+ "\n";
+            informe += guardarDatosService.guardarDatos(euskadi.getMonumentos());
             MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
             informe += castillaYLeon.getInforme() + "\n";
-            informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos())+ "\n";
+            informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
 
         }
         else
@@ -47,19 +47,19 @@ public class CargaService {
                 MonumentosDTO valencia = valenciaWrapperClient.cargarDatos().getBody();
                 System.out.println(valencia.getMonumentos());
                 informe += valencia.getInforme() + "\n";
-                informe += guardarDatosService.guardarDatos(valencia.getMonumentos())+ "\n";
+                informe += guardarDatosService.guardarDatos(valencia.getMonumentos());
             }
             if(eus)
             {
                 MonumentosDTO euskadi = euskadiWrapperClient.cargarDatos().getBody();
                 informe += euskadi.getInforme() + "\n";
-                informe += guardarDatosService.guardarDatos(euskadi.getMonumentos())+ "\n";
+                informe += guardarDatosService.guardarDatos(euskadi.getMonumentos());
             }
             if(cyl)
             {
                 MonumentosDTO castillaYLeon = castillaYLeonWrapperClient.cargarDatos().getBody();
                 informe += castillaYLeon.getInforme() + "\n";
-                informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos())+ "\n";
+                informe += guardarDatosService.guardarDatos(castillaYLeon.getMonumentos());
             }
         }
         return informe;

@@ -9,11 +9,10 @@ public class Monumento {
     private String longitud;
     private String latitud;
     private String descripcion;
-    private String localidad;
-    private String provincia;
+    private Localidad localidad;
+    private Provincia provincia;
 
-
-    public Monumento(String nombre, String tipo, String direccion, String codigo_postal, String longitud, String latitud, String descripcion, String localidad, String provincia) {
+    public Monumento(String nombre, String tipo, String direccion, String codigo_postal, String longitud, String latitud, String descripcion, Localidad localidad, Provincia provincia) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.direccion = direccion;
@@ -25,87 +24,77 @@ public class Monumento {
         this.provincia = provincia;
     }
 
-    public Monumento() {
-        this.nombre = "";
-        this.tipo = "";
-        this.direccion = "";
-        this.codigo_postal = "";
-        this.longitud = "";
-        this.latitud = "";
-        this.descripcion = "";
-        this.localidad = "";
-        this.provincia = "";
-    }
+    public Monumento(){}
 
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getCodigo_postal() {
+    public String getCodigoPostal() {
         return codigo_postal;
-    }
-
-    public void setCodigo_postal(String codigo_postal) {
-        this.codigo_postal = codigo_postal;
     }
 
     public String getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(String longitud) {
-        this.longitud = longitud;
-    }
-
     public String getLatitud() {
         return latitud;
-    }
-
-    public void setLatitud(String latitud) {
-        this.latitud = latitud;
     }
 
     public String getDescripcion() {
         return descripcion;
     }
 
+    public Localidad getLocalidad() {
+        return localidad;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setCodigoPostal(String codigo_postal) {
+        this.codigo_postal = codigo_postal;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
+    public void setLocalidad(Localidad localidad) {
         this.localidad = localidad;
     }
 
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
+    public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
     }
 
@@ -119,8 +108,8 @@ public class Monumento {
                 ", longitud='" + longitud + '\'' +
                 ", latitud='" + latitud + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", localidad='" + localidad + '\'' +
-                ", provincia='" + provincia + '\'' +
+                ", localidad=" + localidad +
+                ", provincia=" + provincia +
                 '}';
     }
 

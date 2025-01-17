@@ -3,7 +3,6 @@ package org.example.Logic;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Models.*;
-import org.example.Utils.LevenshteinComparator;
 import org.example.Utils.MonumentLocator;
 
 import java.util.ArrayList;
@@ -17,16 +16,6 @@ public class Convertidor {
         String nombre = monumento.getDenominacion();
         String tipo = getTipo(monumento);
         String provinciaNombre = monumento.getProvincia();
-        if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "Alicante") < 2) {
-            provinciaNombre = "Alicante";
-        }
-        else if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "CASTELLÓN") < 2) {
-            provinciaNombre = "CASTELLÓN";
-        }
-        else if (LevenshteinComparator.calculateLevenshteinDistance(provinciaNombre, "VALENCIA") < 2) {
-            provinciaNombre = "VALENCIA";
-        }
-
         String municipio = monumento.getMunicipio();
         String latitud = monumento.getLatitud();
         String longitud = monumento.getLongitud();
@@ -36,8 +25,10 @@ public class Convertidor {
         }
         String descripcion = monumento.getClasificacion();
         String codPostal = MonumentLocator.getMonumentPostCode(latitud, longitud);
+        Provincia provincia = new Provincia(codPostal.substring(0, 2), provinciaNombre);
+        Localidad localidad = new Localidad(municipio);
         String direccion = MonumentLocator.getMonumentDirection(latitud, longitud);
-        Monumento monumentoConvertido = new Monumento(nombre, tipo, direccion, codPostal, longitud, latitud, descripcion, municipio, provinciaNombre);
+        Monumento monumentoConvertido = new Monumento(nombre, tipo, direccion, codPostal, longitud, latitud, descripcion, localidad, provincia);
         return monumentoConvertido;
     }
 

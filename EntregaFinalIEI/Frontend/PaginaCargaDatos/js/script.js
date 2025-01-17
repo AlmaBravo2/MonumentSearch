@@ -1,4 +1,10 @@
-const buttonCargar = document.getElementById("buttonCargar");
+document.addEventListener("DOMContentLoaded", async function() {
+
+
+
+
+
+    const buttonCargar = document.getElementById("buttonCargar");
 const selectAllCheckbox = document.getElementById("selectAll");
 const regionCheckboxes = document.querySelectorAll(".region");
 const regionCastilla = document.getElementById("castillaYLeon");
@@ -54,5 +60,5 @@ regionCheckboxes.forEach(checkbox => {
     });
 });
 
-buttonCargar.addEventListener("click",await cargar);
+buttonCargar.addEventListener("click", cargar);});
 
